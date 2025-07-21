@@ -1,6 +1,6 @@
 # vultitool
 
-**Vultisig CLI  Ecosystem Test Suite**
+**Vultisig CLI Ecosystem Tool Suite**
 
 A command-line tool for parsing, analyzing, and validating Vultisig `.vult` vault files. Built as a reference implementation to understand and document the Vultisig MPC wallet ecosystem.
 
@@ -40,12 +40,17 @@ Vultisig is a **seedless crypto wallet** that uses Multi-Party Computation (MPC)
 
 ### `vultitool vault parse <file>`
 
-Parse and display vault contents with human-readable output.
+Parse and display vault contents with flexible output formatting.
 
 **Options:**
 - `--summary` - Brief overview only
 - `--json` - Machine-readable JSON output
 - `--verbose` - Show additional technical details
+
+**Use Cases:**
+- Quick vault overview with `--summary`
+- Automation and scripting with `--json`
+- Flexible detail level control
 
 **Example Output:**
 ```
@@ -72,10 +77,21 @@ Encrypted: No
 
 ### `vultitool vault inspect <file>`
 
-Detailed technical inspection of vault structure.
+Deep technical analysis of vault structure (always detailed/verbose output).
 
 **Options:**
 - `--show-keyshares` - Display sensitive key share data ⚠️
+
+**Use Cases:**
+- Security auditing and forensic analysis
+- Debugging vault issues
+- Accessing sensitive key share data when needed
+
+**Key Differences from `parse`:**
+- Always shows detailed output (equivalent to `parse --verbose`)
+- No JSON or summary output options
+- Can display actual key share data with `--show-keyshares`
+- Designed for technical inspection rather than general parsing
 
 ### `vultitool vault validate <file>`
 
@@ -95,6 +111,22 @@ Export vault metadata to structured format.
 
 **Options:**
 - `--format json|yaml` - Output format (default: json)
+
+## Command Comparison
+
+| Feature | `parse` | `inspect` |
+|---------|---------|----------|
+| **Output Formats** | Human-readable, JSON, Summary | Human-readable only (always detailed) |
+| **Detail Level** | Configurable (`--verbose`) | Always verbose |
+| **Automation Friendly** | Yes (`--json`, `--summary`) | No |
+| **Key Share Data** | Never shown | Optional with `--show-keyshares` |
+| **Primary Use Case** | General parsing, automation | Security analysis, debugging |
+
+**Quick Decision Guide:**
+- Need JSON output or brief summary? → Use `parse`
+- Need to see actual key share data? → Use `inspect`
+- General vault analysis? → Use `parse` 
+- Security audit or debugging? → Use `inspect`
 
 ## Supported Vault Types
 
