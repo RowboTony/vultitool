@@ -1,0 +1,14 @@
+# Python artifacts
+__pycache__/
+*.pyc
+
+# Editor/OS artifacts
+.DS_Store
+.idea/
+.vscode/
+
+# Vault/share files (optional: comment these out if you want them tracked)
+*.vult
+
+# Protobuf/generated output (add later)
+generated/
