@@ -39,6 +39,25 @@ Vultisig is a **seedless crypto wallet** that uses Multi-Party Computation (MPC)
 - **Multi-device support** - Hot (2-of-2) and Secure (2-of-3) vaults
 - **Cross-platform** - iOS, Android, Windows, Web
 
+## Decryption Method Consistency
+
+Vultitool uses **exactly the same decryption methods** as the official [mobile-tss-lib](https://github.com/vultisig/mobile-tss-lib) Go implementation. This ensures 100% compatibility with encrypted `.vult` files.
+
+### Technical Details
+
+**Algorithm**: AES-GCM with SHA256 password hashing  
+**Implementation**: Direct Python port of the Go `DecryptVault` function  
+**Source**: `mobile-tss-lib/cmd/recovery-cli/main.go` lines 522-555  
+
+**Process:**
+1. Hash password using SHA256: `hash := sha256.Sum256([]byte(password))`
+2. Create AES cipher with 256-bit key from hash
+3. Use GCM mode with 12-byte nonce (standard size)
+4. Extract nonce from beginning of encrypted data
+5. Decrypt using `gcm.Open` equivalent with automatic tag verification
+
+This approach eliminates any guesswork and ensures vultitool can decrypt any `.vult` file that the official Vultisig tools can handle.
+
 ## Self-Test System
 
 Vultitool includes a comprehensive self-test system to ensure reliability and serve as a "truth machine" for Vultisig vault analysis.
