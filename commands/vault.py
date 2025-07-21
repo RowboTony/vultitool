@@ -7,15 +7,18 @@ import base64
 import sys
 import json
 import yaml
+import getpass
 from pathlib import Path
 from datetime import datetime
 
-# Add generated protobuf path
+# Add generated protobuf path and commands path
 sys.path.insert(0, str(Path(__file__).parent.parent / "generated"))
+sys.path.insert(0, str(Path(__file__).parent))
 
 from vultisig.vault.v1.vault_container_pb2 import VaultContainer
 from vultisig.vault.v1.vault_pb2 import Vault
 from vultisig.keygen.v1.lib_type_message_pb2 import LibType
+from crypto import VaultDecryptor
 
 class VaultCommands:
     @staticmethod
@@ -29,22 +32,26 @@ class VaultCommands:
         parse_parser.add_argument('--json', action='store_true', help='Output as JSON')
         parse_parser.add_argument('--summary', action='store_true', help='Brief summary only')
         parse_parser.add_argument('--verbose', '-v', action='store_true', help='Verbose output')
+        parse_parser.add_argument('--password', '-p', help='Vault password (if encrypted)')
         
         # Inspect command  
         inspect_parser = subparsers.add_parser('inspect', help='Detailed vault inspection')
         inspect_parser.add_argument('file', help='Path to .vult file')
         inspect_parser.add_argument('--show-keyshares', action='store_true', help='Show key share data (sensitive!)')
+        inspect_parser.add_argument('--password', '-p', help='Vault password (if encrypted)')
         
         # Validate command
         validate_parser = subparsers.add_parser('validate', help='Validate vault format')
         validate_parser.add_argument('file', help='Path to .vult file')
         validate_parser.add_argument('--strict', action='store_true', help='Strict validation')
+        validate_parser.add_argument('--password', '-p', help='Vault password (if encrypted)')
         
         # Export command
         export_parser = subparsers.add_parser('export', help='Export vault data')
         export_parser.add_argument('file', help='Path to .vult file')
         export_parser.add_argument('output', help='Output file path')
         export_parser.add_argument('--format', choices=['json', 'yaml'], default='json', help='Output format')
+        export_parser.add_argument('--password', '-p', help='Vault password (if encrypted)')
     
     @staticmethod
     def handle(args):
@@ -65,7 +72,7 @@ class VaultCommands:
     def parse(args):
         """Parse and display vault contents"""
         try:
-            vault_data = VaultCommands._load_vault(args.file)
+            vault_data = VaultCommands._load_vault(args.file, password=getattr(args, 'password', None))
             if not vault_data:
                 return 1
                 
@@ -85,7 +92,7 @@ class VaultCommands:
     def inspect(args):
         """Detailed vault inspection"""
         try:
-            vault_data = VaultCommands._load_vault(args.file)
+            vault_data = VaultCommands._load_vault(args.file, password=getattr(args, 'password', None))
             if not vault_data:
                 return 1
             
@@ -105,7 +112,7 @@ class VaultCommands:
     def validate(args):
         """Validate vault format"""
         try:
-            vault_data = VaultCommands._load_vault(args.file)
+            vault_data = VaultCommands._load_vault(args.file, password=getattr(args, 'password', None))
             if not vault_data:
                 return 1
             
@@ -150,7 +157,7 @@ class VaultCommands:
     def export(args):
         """Export vault data to file"""
         try:
-            vault_data = VaultCommands._load_vault(args.file)
+            vault_data = VaultCommands._load_vault(args.file, password=getattr(args, 'password', None))
             if not vault_data:
                 return 1
             
@@ -171,7 +178,7 @@ class VaultCommands:
             return 1
     
     @staticmethod
-    def _load_vault(file_path):
+    def _load_vault(file_path, password=None):
         """Load and parse vault file, return structured data"""
         path = Path(file_path)
         
@@ -203,9 +210,26 @@ class VaultCommands:
                 }
             }
             
-            # Parse inner vault if present
-            if container.vault:
+            # Handle encrypted vault
+            if container.is_encrypted:
+                if password is None:
+                    password = getpass.getpass(prompt='Enter vault password: ')
+                
+                # Convert base64 vault data to bytes for decryption
+                encrypted_vault_bytes = base64.b64decode(container.vault)
+                
+                decryptor = VaultDecryptor()
+                vault_binary = decryptor.decrypt_vault_data(encrypted_vault_bytes, password)
+                
+                if not vault_binary:
+                    print("Error: Failed to decrypt vault with provided password")
+                    return None
+            else:
+                # Parse inner vault if present
                 vault_binary = base64.b64decode(container.vault)
+            
+            # Parse the vault from the binary data
+            if vault_binary:
                 vault = Vault()
                 vault.ParseFromString(vault_binary)
                 
