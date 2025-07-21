@@ -5,6 +5,7 @@ Handles password-based decryption of .vult files
 
 import base64
 import hashlib
+import sys
 from typing import Optional
 from pathlib import Path
 
@@ -22,9 +23,10 @@ except ImportError:
 class VaultDecryptor:
     """Handles decryption of password-protected vault files"""
     
-    def __init__(self):
+    def __init__(self, silent=False):
         if not CRYPTO_AVAILABLE:
             raise ImportError("cryptography library not available. Install with: pip install cryptography")
+        self.silent = silent
     
     def decrypt_vault_data(self, encrypted_data: bytes, password: str) -> Optional[bytes]:
         """
@@ -42,10 +44,12 @@ class VaultDecryptor:
         try:
             result = self._vultisig_aes_gcm_sha256(encrypted_data, password)
             if result and self.validate_decrypted_data(result):
-                print(f"✅ Decryption successful using official VultIsig method")
+                if not self.silent:
+                    print(f"✅ Decryption successful using official VultIsig method", file=sys.stderr)
                 return result
         except Exception as e:
-            print(f"🔄 Official VultIsig method failed: {e}")
+            if not self.silent:
+                print(f"🔄 Official VultIsig method failed: {e}", file=sys.stderr)
         
         # Try other common methods as fallback
         methods = [
@@ -57,10 +61,12 @@ class VaultDecryptor:
             try:
                 result = method(encrypted_data, password)
                 if result and self.validate_decrypted_data(result):
-                    print(f"✅ Decryption successful using {method.__name__}")
+                    if not self.silent:
+                        print(f"✅ Decryption successful using {method.__name__}", file=sys.stderr)
                     return result
             except Exception as e:
-                print(f"🔄 {method.__name__} failed: {e}")
+                if not self.silent:
+                    print(f"🔄 {method.__name__} failed: {e}", file=sys.stderr)
                 continue
         
         return None

@@ -72,7 +72,7 @@ class VaultCommands:
     def parse(args):
         """Parse and display vault contents"""
         try:
-            vault_data = VaultCommands._load_vault(args.file, password=getattr(args, 'password', None))
+            vault_data = VaultCommands._load_vault(args.file, password=getattr(args, 'password', None), json_mode=args.json)
             if not vault_data:
                 return 1
                 
@@ -178,7 +178,7 @@ class VaultCommands:
             return 1
     
     @staticmethod
-    def _load_vault(file_path, password=None):
+    def _load_vault(file_path, password=None, json_mode=False):
         """Load and parse vault file, return structured data"""
         path = Path(file_path)
         
@@ -218,7 +218,8 @@ class VaultCommands:
                 # Convert base64 vault data to bytes for decryption
                 encrypted_vault_bytes = base64.b64decode(container.vault)
                 
-                decryptor = VaultDecryptor()
+                # Use silent mode in JSON mode to avoid polluting stdout
+                decryptor = VaultDecryptor(silent=json_mode)
                 vault_binary = decryptor.decrypt_vault_data(encrypted_vault_bytes, password)
                 
                 if not vault_binary:

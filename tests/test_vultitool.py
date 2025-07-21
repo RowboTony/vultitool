@@ -116,7 +116,12 @@ class VultitoolTester:
     
     def test_basic_parse(self, filename: str, expected: Dict) -> bool:
         """Test basic parsing of vault file"""
-        exit_code, stdout, stderr = self.run_vultitool_command(["vault", "parse", filename, "--json"])
+        # Build command with password if required
+        cmd = ["vault", "parse", filename, "--json"]
+        if expected.get("encrypted", False) and "password" in expected:
+            cmd.extend(["--password", expected["password"]])
+            
+        exit_code, stdout, stderr = self.run_vultitool_command(cmd)
         
         if exit_code != 0:
             self.log_result(
@@ -183,9 +188,14 @@ class VultitoolTester:
             )
             return False
     
-    def test_summary_output(self, filename: str) -> bool:
+    def test_summary_output(self, filename: str, expected: Dict = None) -> bool:
         """Test summary output format"""
-        exit_code, stdout, stderr = self.run_vultitool_command(["vault", "parse", filename, "--summary"])
+        # Build command with password if required
+        cmd = ["vault", "parse", filename, "--summary"]
+        if expected and expected.get("encrypted", False) and "password" in expected:
+            cmd.extend(["--password", expected["password"]])
+            
+        exit_code, stdout, stderr = self.run_vultitool_command(cmd)
         
         if exit_code != 0:
             self.log_result(
@@ -208,9 +218,14 @@ class VultitoolTester:
         )
         return success
     
-    def test_validation(self, filename: str) -> bool:
+    def test_validation(self, filename: str, expected: Dict = None) -> bool:
         """Test vault validation"""
-        exit_code, stdout, stderr = self.run_vultitool_command(["vault", "validate", filename])
+        # Build command with password if required
+        cmd = ["vault", "validate", filename]
+        if expected and expected.get("encrypted", False) and "password" in expected:
+            cmd.extend(["--password", expected["password"]])
+            
+        exit_code, stdout, stderr = self.run_vultitool_command(cmd)
         
         # For valid test files, validation should pass
         success = exit_code == 0 and "✅ Vault validation passed" in stdout
@@ -222,14 +237,18 @@ class VultitoolTester:
         )
         return success
     
-    def test_export_functionality(self, filename: str) -> bool:
+    def test_export_functionality(self, filename: str, expected: Dict = None) -> bool:
         """Test vault export functionality"""
         with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as tmp_file:
             tmp_path = tmp_file.name
         
         try:
-            # Test JSON export
-            exit_code, stdout, stderr = self.run_vultitool_command(["vault", "export", filename, tmp_path])
+            # Test JSON export with password if required
+            cmd = ["vault", "export", filename, tmp_path]
+            if expected and expected.get("encrypted", False) and "password" in expected:
+                cmd.extend(["--password", expected["password"]])
+                
+            exit_code, stdout, stderr = self.run_vultitool_command(cmd)
             
             if exit_code != 0:
                 self.log_result(
@@ -275,12 +294,10 @@ class VultitoolTester:
                 pass
     
     def test_encrypted_vault(self) -> bool:
-        """Test handling of encrypted vaults (if any)"""
-        # Note: Currently we know vulticli01-share2of2.vult requires password
-        # But our current parser doesn't handle password-protected files yet
-        # This test documents the expected behavior
-        
+        """Test handling of encrypted vaults with passwords"""
         encrypted_file = "tests/fixtures/vulticli01-share2of2.vult"
+        correct_password = "vulticli01"
+        
         if not Path(encrypted_file).exists():
             self.log_result(
                 "Encrypted vault test",
@@ -289,34 +306,40 @@ class VultitoolTester:
             )
             return True
         
-        exit_code, stdout, stderr = self.run_vultitool_command(["vault", "parse", encrypted_file, "--json"])
+        test_results = []
         
-        # Currently, we expect this to fail since we don't handle passwords yet
-        # This documents the current limitation
-        if exit_code != 0 and ("encrypted" in stderr.lower() or "password" in stderr.lower()):
-            self.log_result(
-                "Encrypted vault test",
-                True,
-                "Encrypted vault error handled as expected",
-                "Password-protected vaults not yet supported (documented limitation)"
-            )
-            return True
-        elif exit_code == 0:
-            # If it succeeds, the file might not actually be encrypted
-            self.log_result(
-                "Encrypted vault test",
-                True,
-                "File parsed successfully - may not be encrypted"
-            )
-            return True
-        else:
-            self.log_result(
-                "Encrypted vault test",
-                False,
-                "Unexpected error handling encrypted vault",
-                stderr
-            )
-            return False
+        # Test 1: With correct password should succeed
+        exit_code, stdout, stderr = self.run_vultitool_command(["vault", "parse", encrypted_file, "--json", "--password", correct_password])
+        correct_password_works = exit_code == 0
+        test_results.append(("correct_password", correct_password_works))
+        
+        # Test 2: With wrong password should fail (PASS means it properly rejects)
+        exit_code, stdout, stderr = self.run_vultitool_command(["vault", "parse", encrypted_file, "--json", "--password", "wrongpassword"])
+        wrong_password_rejected = exit_code != 0  # PASS if command fails (security working)
+        test_results.append(("wrong_password_rejected", wrong_password_rejected))
+        
+        # Test 3: With empty password should fail (PASS means it properly rejects)
+        exit_code, stdout, stderr = self.run_vultitool_command(["vault", "parse", encrypted_file, "--json", "--password", ""])
+        empty_password_rejected = exit_code != 0  # PASS if command fails (security working)
+        test_results.append(("empty_password_rejected", empty_password_rejected))
+        
+        # Test 4: With blank/space password should fail (PASS means it properly rejects)
+        exit_code, stdout, stderr = self.run_vultitool_command(["vault", "parse", encrypted_file, "--json", "--password", "   "])
+        blank_password_rejected = exit_code != 0  # PASS if command fails (security working)
+        test_results.append(("blank_password_rejected", blank_password_rejected))
+        
+        # Overall success if all password security tests work correctly
+        all_tests_passed = all(result[1] for result in test_results)
+        failed_tests = [result[0] for result in test_results if not result[1]]
+        
+        self.log_result(
+            "Encrypted vault test",
+            all_tests_passed,
+            f"Password security works correctly" if all_tests_passed else f"Password security issues: {', '.join(failed_tests)}",
+            "; ".join([f"{test}: {'✓' if passed else '✗'}" for test, passed in test_results])
+        )
+        
+        return all_tests_passed
     
     def test_invalid_file_handling(self) -> bool:
         """Test handling of invalid/corrupted files"""
@@ -380,23 +403,23 @@ class VultitoolTester:
         
         # Test 3: Summary output
         print("3. Testing summary output format...")
-        for filename in self.test_files.keys():
+        for filename, expected in self.test_files.items():
             if Path(filename).exists():
-                self.test_summary_output(filename)
+                self.test_summary_output(filename, expected)
         print()
         
         # Test 4: Validation
         print("4. Testing vault validation...")
-        for filename in self.test_files.keys():
+        for filename, expected in self.test_files.items():
             if Path(filename).exists():
-                self.test_validation(filename)
+                self.test_validation(filename, expected)
         print()
         
         # Test 5: Export functionality
         print("5. Testing export functionality...")
-        for filename in self.test_files.keys():
+        for filename, expected in self.test_files.items():
             if Path(filename).exists():
-                self.test_export_functionality(filename)
+                self.test_export_functionality(filename, expected)
         print()
         
         # Test 6: Error handling
