@@ -9,6 +9,8 @@ __pycache__/
 
 # Vault/share files (optional: comment these out if you want them tracked)
 *.vult
+# Allow test fixture .vult files to be tracked
+!tests/fixtures/*.vult
 
 # Protobuf/generated output (add later)
 generated/

@@ -95,23 +95,16 @@ class DoctorCommands:
             else:
                 print(f"✅ Protobuf bindings: {len(proto_files)} files found")
         
-        # Check for test files
-        test_files = [
-            "tests/fixtures/Test-part1of2.vult",
-            "tests/fixtures/Test-part2of2.vult", 
-            "tests/fixtures/TestDKLS1of2.vult",
-            "tests/fixtures/TestDKLS2of2.vult"
-        ]
-        
-        found_files = []
-        for file in test_files:
-            if Path(file).exists():
-                found_files.append(file)
-        
-        if len(found_files) == 0:
-            issues.append("No test .vult files found")
+        # Check for test files - look for all .vult files in tests/fixtures
+        test_fixtures_path = Path("tests/fixtures")
+        if test_fixtures_path.exists():
+            vult_files = list(test_fixtures_path.glob("*.vult"))
+            if len(vult_files) == 0:
+                issues.append("No test .vult files found in tests/fixtures/")
+            else:
+                print(f"✅ Test files: {len(vult_files)} .vult files available")
         else:
-            print(f"✅ Test files: {len(found_files)}/{len(test_files)} available")
+            issues.append("tests/fixtures/ directory not found")
         
         # Check Python dependencies
         try:
