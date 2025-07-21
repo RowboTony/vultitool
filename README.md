@@ -13,6 +13,9 @@ chmod +x ./vultitool
 # Parse and display a vault file
 ./vultitool vault parse MyVault.vult
 
+# Parse encrypted vault with password
+./vultitool vault parse MyVault.vult --password mypassword
+
 # Brief summary
 ./vultitool vault parse MyVault.vult --summary
 
@@ -55,22 +58,33 @@ Vultitool includes a comprehensive self-test system to ensure reliability and se
 
 ### Test Coverage
 
-**Current Status: 84.8% pass rate (28/33 tests)**
+**Current Status: 100% pass rate (33/33 tests)** ✨
 
 - ✅ **GG20 vault parsing**: `Test-part1of2.vult`, `Test-part2of2.vult`
 - ✅ **DKLS vault parsing**: `TestDKLS1of2.vult`, `TestDKLS2of2.vult`  
+- ✅ **Encrypted vault support**: `vulticli01-share2of2.vult` with password authentication
+- ✅ **Password security validation**: Tests correct/incorrect/empty/blank password handling
 - ✅ **Output format validation**: JSON, summary, export functionality
 - ✅ **Error handling**: Invalid files, missing files
-- ❌ **Password-protected vaults**: Known limitation (password: `vulticli01` for `vulticli01-share2of2.vult`)
+- ✅ **Automated testing**: Fully automated selftest with no manual intervention required
 
 ### Example Test Output
 
 ```
-[PASS] Parsed GG20 vault: Test-part1of2.vult
-[PASS] Parsed DKLS vault: TestDKLS2of2.vult
-[PASS] Encrypted vault error as expected
-[PASS] JSON export for Test-part1of2.vult
-[FAIL] Field X missing in Y (if any edge cases)
+[PASS] Basic parse: tests/fixtures/Test-part1of2.vult
+       Parsed GG20 vault successfully
+[PASS] Basic parse: tests/fixtures/vulticli01-share2of2.vult 
+       Parsed DKLS vault successfully
+[PASS] Encrypted vault test
+       Password security works correctly
+[PASS] Export JSON: tests/fixtures/TestDKLS1of2.vult
+       JSON export successful
+
+=== Test Results Summary ===
+Total tests: 33
+Passed: 33
+Failed: 0
+Pass rate: 100.0%
 ```
 
 See [`TESTING.md`](TESTING.md) for complete testing documentation.
@@ -85,6 +99,7 @@ Parse and display vault contents with flexible output formatting.
 - `--summary` - Brief overview only
 - `--json` - Machine-readable JSON output
 - `--verbose` - Show additional technical details
+- `--password` - Vault password for encrypted vaults
 
 **Use Cases:**
 - Quick vault overview with `--summary`
@@ -120,6 +135,7 @@ Deep technical analysis of vault structure (always detailed/verbose output).
 
 **Options:**
 - `--show-keyshares` - Display sensitive key share data ⚠️
+- `--password` - Vault password for encrypted vaults
 
 **Use Cases:**
 - Security auditing and forensic analysis
@@ -138,6 +154,7 @@ Validate vault file format and structure.
 
 **Options:**
 - `--strict` - Enable strict validation rules
+- `--password` - Vault password for encrypted vaults
 
 **Output:**
 ```
@@ -150,6 +167,7 @@ Export vault metadata to structured format.
 
 **Options:**
 - `--format json|yaml` - Output format (default: json)
+- `--password` - Vault password for encrypted vaults
 
 ## Command Comparison
 
@@ -175,6 +193,7 @@ Export vault metadata to structured format.
 | **DKLS** | Modern MPC protocol | ECDSA/EdDSA | Enhanced security |
 | **Fast Vault** | 2-of-2 threshold | Hot signing | Daily transactions |
 | **Secure Vault** | 2-of-3 threshold | Cold storage | Long-term holding |
+| **Encrypted Vault** | Password-protected | Any protocol | Extra security layer |
 
 ## Understanding .vult Files
 
@@ -182,7 +201,7 @@ Export vault metadata to structured format.
 
 1. **VaultContainer** (outer wrapper)
    - Version info
-   - Encryption status
+   - Encryption status (supports password protection)
    - Inner vault data
 
 2. **Vault** (core data)

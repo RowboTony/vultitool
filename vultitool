@@ -21,16 +21,17 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  vultitool vault parse file.vult              # Parse and display vault
-  vultitool vault parse file.vult --json       # JSON output
-  vultitool vault parse file.vult --summary    # Brief summary
-  vultitool vault inspect file.vult            # Detailed inspection
-  vultitool vault validate file.vult           # Validate vault format
-  vultitool vault export file.vult output.json # Export to file
+  vultitool vault parse file.vult                        # Parse and display vault
+  vultitool vault parse file.vult --password mypass      # Parse encrypted vault
+  vultitool vault parse file.vult --json                 # JSON output
+  vultitool vault parse file.vult --summary              # Brief summary
+  vultitool vault inspect file.vult                      # Detailed inspection
+  vultitool vault validate file.vult --password mypass   # Validate encrypted vault
+  vultitool vault export file.vult output.json           # Export to file
   
-  vultitool doctor health                       # Quick health check
-  vultitool doctor selftest                     # Run comprehensive tests
-  vultitool doctor env                          # Environment diagnostics
+  vultitool doctor health                                 # Quick health check
+  vultitool doctor selftest                               # Run comprehensive tests
+  vultitool doctor env                                    # Environment diagnostics
 
 For more information: https://github.com/vultisig/vultitool
         """
