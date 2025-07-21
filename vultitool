@@ -12,6 +12,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
 from commands.vault import VaultCommands
+from commands.doctor import DoctorCommands
 
 def main():
     parser = argparse.ArgumentParser(
@@ -26,6 +27,10 @@ Examples:
   vultitool vault inspect file.vult            # Detailed inspection
   vultitool vault validate file.vult           # Validate vault format
   vultitool vault export file.vult output.json # Export to file
+  
+  vultitool doctor health                       # Quick health check
+  vultitool doctor selftest                     # Run comprehensive tests
+  vultitool doctor env                          # Environment diagnostics
 
 For more information: https://github.com/vultisig/vultitool
         """
@@ -40,12 +45,18 @@ For more information: https://github.com/vultisig/vultitool
     vault_parser = subparsers.add_parser('vault', help='Vault operations')
     VaultCommands.setup_parser(vault_parser)
     
+    # Doctor subcommand
+    doctor_parser = subparsers.add_parser('doctor', help='Health checks and diagnostics')
+    DoctorCommands.setup_parser(doctor_parser)
+    
     # Parse arguments
     args = parser.parse_args()
     
     # Route to appropriate command handler
     if args.command == 'vault':
         return VaultCommands.handle(args)
+    elif args.command == 'doctor':
+        return DoctorCommands.handle(args)
     else:
         parser.print_help()
         return 1

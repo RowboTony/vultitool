@@ -1,0 +1,289 @@
+{
+  "test_run": {
+    "timestamp": "2025-07-21T16:18:05.678011",
+    "total_tests": 33,
+    "passed": 28,
+    "failed": 5,
+    "pass_rate": 84.84848484848484
+  },
+  "test_files": {
+    "Test-part1of2.vult": {
+      "type": "GG20",
+      "vault_name": "Test private key vault",
+      "encrypted": false,
+      "expected_signers": 2,
+      "expected_shares": 2,
+      "public_key_ecdsa": "0267db81657a956f364167c3986a426b448a74ac0db2092f6665c4c202b37f6f1d"
+    },
+    "Test-part2of2.vult": {
+      "type": "GG20",
+      "vault_name": "Test private key vault",
+      "encrypted": false,
+      "expected_signers": 2,
+      "expected_shares": 2,
+      "public_key_ecdsa": "0267db81657a956f364167c3986a426b448a74ac0db2092f6665c4c202b37f6f1d"
+    },
+    "TestDKLS1of2.vult": {
+      "type": "DKLS",
+      "vault_name": "Test Fast Vault DKLS",
+      "encrypted": false,
+      "expected_signers": 2,
+      "expected_shares": 2,
+      "public_key_ecdsa": "0333e3d4df9cc071be24fd6c995421036074a1a88e5d3e0bc211b7ef4330078d9b"
+    },
+    "TestDKLS2of2.vult": {
+      "type": "DKLS",
+      "vault_name": "Test Fast Vault DKLS",
+      "encrypted": false,
+      "expected_signers": 2,
+      "expected_shares": 2,
+      "public_key_ecdsa": "0333e3d4df9cc071be24fd6c995421036074a1a88e5d3e0bc211b7ef4330078d9b"
+    },
+    "vulticli01-share1of2.vult": {
+      "type": "DKLS",
+      "encrypted": false,
+      "expected_signers": 2,
+      "expected_shares": 2
+    },
+    "vulticli01-share2of2.vult": {
+      "type": "DKLS",
+      "encrypted": true,
+      "password": "vulticli01",
+      "expected_signers": 2,
+      "expected_shares": 2
+    }
+  },
+  "results": [
+    {
+      "test": "File existence: Test-part1of2.vult",
+      "status": "PASS",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/Test-part1of2.vult",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.352216"
+    },
+    {
+      "test": "File existence: Test-part2of2.vult",
+      "status": "PASS",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/Test-part2of2.vult",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.352250"
+    },
+    {
+      "test": "File existence: TestDKLS1of2.vult",
+      "status": "PASS",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/TestDKLS1of2.vult",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.352265"
+    },
+    {
+      "test": "File existence: TestDKLS2of2.vult",
+      "status": "PASS",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/TestDKLS2of2.vult",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.352292"
+    },
+    {
+      "test": "File existence: vulticli01-share1of2.vult",
+      "status": "PASS",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/vulticli01-share1of2.vult",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.352322"
+    },
+    {
+      "test": "File existence: vulticli01-share2of2.vult",
+      "status": "PASS",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/vulticli01-share2of2.vult",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.352352"
+    },
+    {
+      "test": "Basic parse: Test-part1of2.vult",
+      "status": "PASS",
+      "message": "Parsed GG20 vault successfully",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.404574"
+    },
+    {
+      "test": "Basic parse: Test-part2of2.vult",
+      "status": "PASS",
+      "message": "Parsed GG20 vault successfully",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.452623"
+    },
+    {
+      "test": "Basic parse: TestDKLS1of2.vult",
+      "status": "PASS",
+      "message": "Parsed DKLS vault successfully",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.501470"
+    },
+    {
+      "test": "Basic parse: TestDKLS2of2.vult",
+      "status": "PASS",
+      "message": "Parsed DKLS vault successfully",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.549391"
+    },
+    {
+      "test": "Basic parse: vulticli01-share1of2.vult",
+      "status": "PASS",
+      "message": "Parsed DKLS vault successfully",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.594988"
+    },
+    {
+      "test": "Basic parse: vulticli01-share2of2.vult",
+      "status": "FAIL",
+      "message": "Command failed with exit code 1",
+      "details": "stderr: ",
+      "timestamp": "2025-07-21T16:18:04.640836"
+    },
+    {
+      "test": "Summary output: Test-part1of2.vult",
+      "status": "PASS",
+      "message": "Summary format correct",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.685307"
+    },
+    {
+      "test": "Summary output: Test-part2of2.vult",
+      "status": "PASS",
+      "message": "Summary format correct",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.731600"
+    },
+    {
+      "test": "Summary output: TestDKLS1of2.vult",
+      "status": "PASS",
+      "message": "Summary format correct",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.778345"
+    },
+    {
+      "test": "Summary output: TestDKLS2of2.vult",
+      "status": "PASS",
+      "message": "Summary format correct",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.824396"
+    },
+    {
+      "test": "Summary output: vulticli01-share1of2.vult",
+      "status": "PASS",
+      "message": "Summary format correct",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.872914"
+    },
+    {
+      "test": "Summary output: vulticli01-share2of2.vult",
+      "status": "FAIL",
+      "message": "Command failed with exit code 1",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.918738"
+    },
+    {
+      "test": "Validation: Test-part1of2.vult",
+      "status": "PASS",
+      "message": "Validation passed",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:04.967491"
+    },
+    {
+      "test": "Validation: Test-part2of2.vult",
+      "status": "PASS",
+      "message": "Validation passed",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:05.019467"
+    },
+    {
+      "test": "Validation: TestDKLS1of2.vult",
+      "status": "PASS",
+      "message": "Validation passed",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:05.071747"
+    },
+    {
+      "test": "Validation: TestDKLS2of2.vult",
+      "status": "PASS",
+      "message": "Validation passed",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:05.119763"
+    },
+    {
+      "test": "Validation: vulticli01-share1of2.vult",
+      "status": "PASS",
+      "message": "Validation passed",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:05.171588"
+    },
+    {
+      "test": "Validation: vulticli01-share2of2.vult",
+      "status": "FAIL",
+      "message": "Validation failed (exit: 1)",
+      "details": "Error loading vault: Error parsing message with type 'vultisig.vault.v1.Vault'\n",
+      "timestamp": "2025-07-21T16:18:05.219595"
+    },
+    {
+      "test": "Export JSON: Test-part1of2.vult",
+      "status": "PASS",
+      "message": "JSON export successful",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:05.268614"
+    },
+    {
+      "test": "Export JSON: Test-part2of2.vult",
+      "status": "PASS",
+      "message": "JSON export successful",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:05.321260"
+    },
+    {
+      "test": "Export JSON: TestDKLS1of2.vult",
+      "status": "PASS",
+      "message": "JSON export successful",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:05.374288"
+    },
+    {
+      "test": "Export JSON: TestDKLS2of2.vult",
+      "status": "PASS",
+      "message": "JSON export successful",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:05.428821"
+    },
+    {
+      "test": "Export JSON: vulticli01-share1of2.vult",
+      "status": "PASS",
+      "message": "JSON export successful",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:05.479261"
+    },
+    {
+      "test": "Export JSON: vulticli01-share2of2.vult",
+      "status": "FAIL",
+      "message": "Export command failed (exit: 1)",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:05.530333"
+    },
+    {
+      "test": "Encrypted vault test",
+      "status": "FAIL",
+      "message": "Unexpected error handling encrypted vault",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:05.581594"
+    },
+    {
+      "test": "Invalid file handling",
+      "status": "PASS",
+      "message": "Invalid file rejected as expected",
+      "details": "exit_code: 1, stderr: ...",
+      "timestamp": "2025-07-21T16:18:05.628274"
+    },
+    {
+      "test": "Missing file handling",
+      "status": "PASS",
+      "message": "Missing file handled as expected",
+      "details": "",
+      "timestamp": "2025-07-21T16:18:05.677916"
+    }
+  ]
+}
