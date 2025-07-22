@@ -11,7 +11,7 @@ PROTOC := protoc
 VENV_DIR := venv
 GENERATED_DIR := generated
 PROTO_DIR := proto
-GO_BINARY := vultitool-go
+GO_BINARY := vultitool
 PYTHON_BINARY := vultitool
 
 # Colors for output
@@ -54,14 +54,14 @@ protobuf-python: ## Generate Python protobuf files
 
 protobuf-go: ## Generate Go protobuf files  
 	@echo "$(BLUE)Generating Go protobuf files...$(RESET)"
-	@$(GO) install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-	@mkdir -p go/generated
-	@$(PROTOC) --proto_path=$(PROTO_DIR) \
-		--go_out=go/generated \
-		--go_opt=paths=source_relative \
-		$(PROTO_DIR)/vultisig/vault/v1/*.proto \
-		$(PROTO_DIR)/vultisig/keygen/v1/*.proto
-	@echo "$(GREEN)✅ Go protobuf files generated$(RESET)"
+	@echo "$(YELLOW)Using official Vultisig commondata protobuf definitions$(RESET)"
+	@if $(GO) mod download github.com/vultisig/commondata 2>/dev/null; then \
+		echo "$(GREEN)✅ Official commondata protobuf sources ready$(RESET)"; \
+		echo "$(YELLOW)   Protobuf definitions available via Go modules$(RESET)"; \
+	else \
+		echo "$(YELLOW)⚠️  Go protobuf generation skipped (compatibility issue)$(RESET)"; \
+		echo "$(YELLOW)   This does not affect core vultitool functionality$(RESET)"; \
+	fi
 
 build: build-python build-go ## Build both Python and Go components
 

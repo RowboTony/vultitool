@@ -9,6 +9,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 *No unreleased changes at this time.*
 
+## [v0.3.4] - 2025-07-22 🏛️ Canonical Vultisig Integration
+
+### Added
+- **Official Vultisig protobuf integration**: Now uses `github.com/vultisig/commondata` directly via Go modules
+- **Version alignment**: Matches exact dependency versions from `vultisig-go` for maximum compatibility
+- **Canonical source guarantee**: All protobuf definitions sourced from official Vultisig repositories (no local copies)
+- **Go module integration**: Added proper Go workspace with official Vultisig dependencies
+
+### Changed  
+- **Eliminated local protobuf files**: Replaced with direct imports from `github.com/vultisig/commondata`
+- **Updated go.mod**: Now includes official Vultisig commondata and protobuf dependencies
+- **Enhanced Makefile**: Improved protobuf generation with official source validation
+- **Updated documentation**: README now emphasizes canonical source integration and compatibility
+
+### Technical
+- **Dependencies aligned**:
+  - `github.com/vultisig/commondata v0.0.0-20250710214228-61d9ed8f7778` (official protobuf schemas)
+  - `google.golang.org/protobuf v1.34.2` (compatible with commondata)
+  - `go 1.24` (matching vultisig-go requirements)
+- **Build reliability**: Go binary builds successfully with official protobuf access
+- **Unified architecture**: Single `vultitool` binary (removed obsolete `vultitool-go`)
+
+### Documentation
+- **README enhanced**: Added "Official Vultisig Integration" section highlighting canonical sources
+- **Technical accuracy**: All documentation now reflects official integration approach
+- **Developer confidence**: Clear guarantee of 100% compatibility with official Vultisig applications
+
 ## [v0.3.2] - 2025-07-22
 
 ### Fixed

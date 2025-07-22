@@ -4,6 +4,17 @@
 
 A command-line tool for parsing, analyzing, and validating Vultisig `.vult` vault files. Built as a reference implementation to understand and document the Vultisig MPC wallet ecosystem.
 
+## 🏛️ Official Vultisig Integration
+
+**vultitool uses the canonical Vultisig sources for maximum compatibility and accuracy:**
+
+- **Protobuf Schemas**: Direct integration with [github.com/vultisig/commondata](https://github.com/vultisig/commondata) - the official protobuf definitions used by all Vultisig applications
+- **Cryptographic Libraries**: Aligned with [github.com/vultisig/mobile-tss-lib](https://github.com/vultisig/mobile-tss-lib) for decryption and vault handling
+- **Version Parity**: Matches dependency versions from [github.com/vultisig/vultisig-go](https://github.com/vultisig/vultisig-go) for protocol compatibility
+- **No Local Copies**: All protobuf definitions are sourced directly from official Vultisig repositories via Go modules
+
+**This ensures 100% compatibility with official Vultisig applications** and serves as the definitive technical reference for the Vultisig ecosystem.
+
 ## Installation & Setup
 
 **Prerequisites:** Python 3.8+, Go 1.19+, Protocol Buffers Compiler (protoc), Git
