@@ -77,11 +77,13 @@ Vultitool includes a comprehensive self-test system to ensure reliability and se
 
 ### Test Coverage
 
-**Current Status: 100% pass rate (33/33 tests)** ✨
+**Current Status: 100% pass rate (48/48 tests)** ✨
 
 - ✅ **GG20 vault parsing**: `testGG20-part1of2.vult`, `testGG20-part2of2.vult`
 - ✅ **DKLS vault parsing**: `testDKLS-1of2.vult`, `testDKLS-2of2.vult`
-- ✅ **Encrypted vault support**: `qa-fast-share2of2.vult` with password authentication
+- ✅ **Fast Vault (2-of-2)**: `qa-fast-share1of2.vult`, `qa-fast-share2of2.vult`
+- ✅ **Secure Vault (3-of-3)**: `qa-secure-share1of3.vult`, `qa-secure-share2of3.vult`, `qa-secure-share3of3.vult`
+- ✅ **Encrypted vault support**: Password-protected vaults with authentication
 - ✅ **Password security validation**: Tests correct/incorrect/empty/blank password handling
 - ✅ **Output format validation**: JSON, summary, export functionality
 - ✅ **Error handling**: Invalid files, missing files
@@ -100,8 +102,8 @@ Vultitool includes a comprehensive self-test system to ensure reliability and se
        JSON export successful
 
 === Test Results Summary ===
-Total tests: 33
-Passed: 33
+Total tests: 48
+Passed: 48
 Failed: 0
 Pass rate: 100.0%
 ```

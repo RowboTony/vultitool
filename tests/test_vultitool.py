@@ -65,6 +65,30 @@ class VultitoolTester:
                 "password": "vulticli01",
                 "expected_signers": 2,
                 "expected_shares": 2
+            },
+            "tests/fixtures/qa-secure-share1of3.vult": {
+                "type": "DKLS",
+                "vault_name": "QA Secure Vault 01",
+                "encrypted": False,
+                "expected_signers": 3,
+                "expected_shares": 2,
+                "public_key_ecdsa": "0303e8bb14669d4e4b1a786dd4e0a9c990c59c1e1ee510dd7fabe335b6ac48a3d7"
+            },
+            "tests/fixtures/qa-secure-share2of3.vult": {
+                "type": "DKLS",
+                "vault_name": "QA Secure Vault 01",
+                "encrypted": False,
+                "expected_signers": 3,
+                "expected_shares": 2,
+                "public_key_ecdsa": "0303e8bb14669d4e4b1a786dd4e0a9c990c59c1e1ee510dd7fabe335b6ac48a3d7"
+            },
+            "tests/fixtures/qa-secure-share3of3.vult": {
+                "type": "DKLS",
+                "vault_name": "QA Secure Vault 01",
+                "encrypted": False,
+                "expected_signers": 3,
+                "expected_shares": 2,
+                "public_key_ecdsa": "0303e8bb14669d4e4b1a786dd4e0a9c990c59c1e1ee510dd7fabe335b6ac48a3d7"
             }
         }
         

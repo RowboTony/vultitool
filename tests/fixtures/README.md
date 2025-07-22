@@ -16,6 +16,11 @@ This directory contains Vultisig `.vult` vault files used for testing and valida
 - **`qa-fast-share1of2.vult`** - DKLS vault share 1 (unencrypted)
 - **`qa-fast-share2of2.vult`** - DKLS vault share 2 (password-protected: `vulticli01`)
 
+### Secure Vault (3-Part DKLS)
+- **`qa-secure-share1of3.vult`** - Part 1 of 3-of-3 DKLS "Secure Vault" ("QA Secure Vault 01")
+- **`qa-secure-share2of3.vult`** - Part 2 of 3-of-3 DKLS "Secure Vault" ("QA Secure Vault 01")
+- **`qa-secure-share3of3.vult`** - Part 3 of 3-of-3 DKLS "Secure Vault" ("QA Secure Vault 01")
+
 ## Vault Specifications
 
 | File | Type | Encryption | Signers | Shares |
@@ -26,6 +31,9 @@ This directory contains Vultisig `.vult` vault files used for testing and valida
 | `testDKLS-2of2.vult` | DKLS | No | 2 | 2 |
 | `qa-fast-share1of2.vult` | DKLS | No | 2 | 2 |
 | `qa-fast-share2of2.vult` | DKLS | **Yes** | 2 | 2 |
+| `qa-secure-share1of3.vult` | DKLS | No | 3 | 2 |
+| `qa-secure-share2of3.vult` | DKLS | No | 3 | 2 |
+| `qa-secure-share3of3.vult` | DKLS | No | 3 | 2 |
 
 ## Usage in Tests
 
