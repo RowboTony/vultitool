@@ -79,7 +79,7 @@ Vultitool includes a comprehensive self-test system to ensure reliability and se
 
 **Current Status: 100% pass rate (33/33 tests)** ✨
 
-- ✅ **GG20 vault parsing**: `Test-part1of2.vult`, `Test-part2of2.vult`
+- ✅ **GG20 vault parsing**: `testGG20-part1of2.vult`, `testGG20-part2of2.vult`
 - ✅ **DKLS vault parsing**: `TestDKLS1of2.vult`, `TestDKLS2of2.vult`  
 - ✅ **Encrypted vault support**: `qa-fast-share2of2.vult` with password authentication
 - ✅ **Password security validation**: Tests correct/incorrect/empty/blank password handling
@@ -90,7 +90,7 @@ Vultitool includes a comprehensive self-test system to ensure reliability and se
 ### Example Test Output
 
 ```
-[PASS] Basic parse: tests/fixtures/Test-part1of2.vult
+[PASS] Basic parse: tests/fixtures/testGG20-part1of2.vult
        Parsed GG20 vault successfully
 [PASS] Basic parse: tests/fixtures/qa-fast-share2of2.vult 
        Parsed DKLS vault successfully
@@ -127,7 +127,7 @@ Parse and display vault contents with flexible output formatting.
 
 **Example Output:**
 ```
-=== Vault Analysis: Test-part1of2.vult ===
+=== Vault Analysis: testGG20-part1of2.vult ===
 File Size: 26644 chars → 19982 bytes
 Container Version: 1
 Encrypted: No

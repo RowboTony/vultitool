@@ -5,8 +5,8 @@ This directory contains Vultisig `.vult` vault files used for testing and valida
 ## Test Files
 
 ### GG20 Vaults (Traditional MPC Protocol)
-- **`Test-part1of2.vult`** - Part 1 of 2-of-2 GG20 vault ("Test private key vault")
-- **`Test-part2of2.vult`** - Part 2 of 2-of-2 GG20 vault ("Test private key vault")
+- **`testGG20-part1of2.vult`** - Part 1 of 2-of-2 GG20 vault ("Test private key vault")
+- **`testGG20-part2of2.vult`** - Part 2 of 2-of-2 GG20 vault ("Test private key vault")
 
 ### DKLS Vaults (Modern MPC Protocol)  
 - **`TestDKLS1of2.vult`** - Part 1 of 2-of-2 DKLS vault ("Test Fast Vault DKLS")
@@ -21,7 +21,7 @@ This directory contains Vultisig `.vult` vault files used for testing and valida
 | File | Type | Encryption | Signers | Shares | Public Key (ECDSA) |
 |------|------|------------|---------|---------|-------------------|
 | `Test-part1of2.vult` | GG20 | No | 2 | 2 | `0267db81...` |
-| `Test-part2of2.vult` | GG20 | No | 2 | 2 | `0267db81...` |
+|| `testGG20-part1of2.vult` | GG20 | No | 2 | 2 | `0267db81...` |
 | `TestDKLS1of2.vult` | DKLS | No | 2 | 2 | `0333e3d4...` |
 | `TestDKLS2of2.vult` | DKLS | No | 2 | 2 | `0333e3d4...` |
 || `qa-fast-share1of2.vult` | DKLS | No | 2 | 2 | - |

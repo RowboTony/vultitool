@@ -127,7 +127,7 @@ def main():
         epilog="""
 Examples:
   python parse_vult_enhanced.py TestDKLS2of2.vult
-  python parse_vult_enhanced.py --verbose Test-part1of2.vult
+  python parse_vult_enhanced.py --verbose testGG20-part1of2.vult
         """
     )
     

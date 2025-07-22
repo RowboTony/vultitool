@@ -21,7 +21,7 @@ class VultitoolTester:
         
         # Known test files and their expected properties
         self.test_files = {
-            "tests/fixtures/Test-part1of2.vult": {
+            "tests/fixtures/testGG20-part1of2.vult": {
                 "type": "GG20",
                 "vault_name": "Test private key vault",
                 "encrypted": False,
@@ -29,7 +29,7 @@ class VultitoolTester:
                 "expected_shares": 2,
                 "public_key_ecdsa": "0267db81657a956f364167c3986a426b448a74ac0db2092f6665c4c202b37f6f1d"
             },
-            "tests/fixtures/Test-part2of2.vult": {
+            "tests/fixtures/testGG20-part2of2.vult": {
                 "type": "GG20", 
                 "vault_name": "Test private key vault",
                 "encrypted": False,
