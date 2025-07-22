@@ -2,6 +2,23 @@
 __pycache__/
 *.pyc
 
+# Go artifacts
+# Compiled binaries
+vultitool-go
+vultitool.exe
+*.exe
+*.dll
+*.so
+*.dylib
+# Go test cache and coverage
+*.out
+*.test
+# Go build cache (if using custom GOCACHE)
+.gocache/
+# Go modules download cache (usually global, but just in case)
+go.work
+go.work.sum
+
 # Editor/OS artifacts
 .DS_Store
 .idea/
@@ -12,5 +29,6 @@ __pycache__/
 # Allow test fixture .vult files to be tracked
 !tests/fixtures/*.vult
 
-# Protobuf/generated output (add later)
+# Protobuf/generated output
 generated/
+*.pb.go
