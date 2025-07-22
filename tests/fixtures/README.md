@@ -18,14 +18,14 @@ This directory contains Vultisig `.vult` vault files used for testing and valida
 
 ## Vault Specifications
 
-| File | Type | Encryption | Signers | Shares | Public Key (ECDSA) |
-|------|------|------------|---------|---------|-------------------|
-| `testGG20-part1of2.vult` | GG20 | No | 2 | 2 | `0267db81...` |
-| `testGG20-part2of2.vult` | GG20 | No | 2 | 2 | `0267db81...` |
-| `testDKLS-1of2.vult` | DKLS | No | 2 | 2 | `0333e3d4...` |
-| `testDKLS-2of2.vult` | DKLS | No | 2 | 2 | `0333e3d4...` |
-| `qa-fast-share1of2.vult` | DKLS | No | 2 | 2 | - |
-| `qa-fast-share2of2.vult` | DKLS | **Yes** | 2 | 2 | - |
+| File | Type | Encryption | Signers | Shares |
+|------|------|------------|---------|--------|
+| `testGG20-part1of2.vult` | GG20 | No | 2 | 2 |
+| `testGG20-part2of2.vult` | GG20 | No | 2 | 2 |
+| `testDKLS-1of2.vult` | DKLS | No | 2 | 2 |
+| `testDKLS-2of2.vult` | DKLS | No | 2 | 2 |
+| `qa-fast-share1of2.vult` | DKLS | No | 2 | 2 |
+| `qa-fast-share2of2.vult` | DKLS | **Yes** | 2 | 2 |
 
 ## Usage in Tests
 
