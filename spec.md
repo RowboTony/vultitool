@@ -201,3 +201,60 @@ vultitool/
 
 ---
 
+---
+## 🆕 Vultisig-Go Integration & Documentation Initiative
+
+### Context & Motivation
+
+As of July 2025, it is clear that **`vultisig-go` is not used directly by the main Vultisig application repos**, but is instead a complementary, developer-focused CLI tool built on top of the same shared cryptographic foundation (`commondata` for protos, `mobile-tss-lib` for cryptography).
+
+However, the official `vultisig-go` repository is missing essential developer onboarding materials:  
+- No README, no setup documentation, and hard-to-discover dependencies (e.g., native libs, Nix).
+- GG20 support is read-only; DKLS is now the primary focus.
+- The tool assumes deep cryptographic and infrastructure knowledge.
+
+### New Project Objective
+
+**My goal is to create a developer-friendly fork of `vultisig-go` that:**
+- Provides thorough documentation (setup, build, usage, limitations, and quickstart).
+- Bridges the gap between Vultisig power-users and new contributors.
+- Enables easy local onboarding for TSS/MPC development, research, and integration.
+
+### Integration Plan
+
+1. **Fork `vultisig-go` into my own repo (`RowboTony/vultisig-go`)**
+   - All improvements are tracked and documented for transparency.
+   - Explicitly state that this fork is for onboarding, research, and developer experience.
+
+2. **Document Every Step**
+   - Add a comprehensive `README.md` (what, why, how).
+   - Step-by-step environment setup, troubleshooting, and real-world examples.
+   - Limitations and gotchas (e.g., native library needs, DKLS vs GG20).
+
+3. **Integrate with vultitool**
+   - Add support so vultitool can optionally call vultisig-go for source-of-truth operations.
+   - Shared fixtures: both tools use the same `.vult` test files for validation.
+
+4. **Promote Best Practices**
+   - Use temporary directories for vault files (no silent local persistence).
+   - Document safe patterns for integration with other wallets and future SDKs.
+
+### Why This Matters
+
+- **Vultisig-go is Valhalla for developers**: All protocol knowledge, live reference implementation, but hard to approach without a guide.
+- **My fork will be the “O’Reilly Book” for Vultisig-Go**: Onboarding, dev experience, real documentation.
+- **Synergy with vultitool**: Python for analysis, Go for protocol truth, both fully testable and auditable.
+
+### Roadmap Additions
+
+- [ ] Fork `vultisig-go` and initialize documentation
+- [ ] Document missing native dependencies and build steps
+- [ ] Develop test harness for vultitool/vultisig-go parity
+- [ ] Publish onboarding blog or tutorial for new devs
+
+---
+
+#### *All architectural discoveries and developer experience improvements will be documented in both `spec.md` and the project README to support future contributors, LLM training, and the wider Vultisig community.*
+
+---
+
