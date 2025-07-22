@@ -77,11 +77,13 @@ Vultitool includes a comprehensive self-test system to ensure reliability and se
 
 ### Test Coverage
 
-**Current Status: 100% pass rate (33/33 tests)** ✨
+**Current Status: 100% pass rate (48/48 tests)** ✨
 
-- ✅ **GG20 vault parsing**: `Test-part1of2.vult`, `Test-part2of2.vult`
-- ✅ **DKLS vault parsing**: `TestDKLS1of2.vult`, `TestDKLS2of2.vult`  
-- ✅ **Encrypted vault support**: `vulticli01-share2of2.vult` with password authentication
+- ✅ **GG20 vault parsing**: `testGG20-part1of2.vult`, `testGG20-part2of2.vult`
+- ✅ **DKLS vault parsing**: `testDKLS-1of2.vult`, `testDKLS-2of2.vult`
+- ✅ **Fast Vault (2-of-2)**: `qa-fast-share1of2.vult`, `qa-fast-share2of2.vult`
+- ✅ **Secure Vault (3-of-3)**: `qa-secure-share1of3.vult`, `qa-secure-share2of3.vult`, `qa-secure-share3of3.vult`
+- ✅ **Encrypted vault support**: Password-protected vaults with authentication
 - ✅ **Password security validation**: Tests correct/incorrect/empty/blank password handling
 - ✅ **Output format validation**: JSON, summary, export functionality
 - ✅ **Error handling**: Invalid files, missing files
@@ -90,18 +92,18 @@ Vultitool includes a comprehensive self-test system to ensure reliability and se
 ### Example Test Output
 
 ```
-[PASS] Basic parse: tests/fixtures/Test-part1of2.vult
+[PASS] Basic parse: tests/fixtures/testGG20-part1of2.vult
        Parsed GG20 vault successfully
-[PASS] Basic parse: tests/fixtures/vulticli01-share2of2.vult 
+[PASS] Basic parse: tests/fixtures/qa-fast-share2of2.vult 
        Parsed DKLS vault successfully
 [PASS] Encrypted vault test
        Password security works correctly
-[PASS] Export JSON: tests/fixtures/TestDKLS1of2.vult
+[PASS] Export JSON: tests/fixtures/testDKLS-1of2.vult
        JSON export successful
 
 === Test Results Summary ===
-Total tests: 33
-Passed: 33
+Total tests: 48
+Passed: 48
 Failed: 0
 Pass rate: 100.0%
 ```
@@ -127,7 +129,7 @@ Parse and display vault contents with flexible output formatting.
 
 **Example Output:**
 ```
-=== Vault Analysis: Test-part1of2.vult ===
+=== Vault Analysis: testGG20-part1of2.vult ===
 File Size: 26644 chars → 19982 bytes
 Container Version: 1
 Encrypted: No

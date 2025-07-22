@@ -21,7 +21,7 @@ class VultitoolTester:
         
         # Known test files and their expected properties
         self.test_files = {
-            "tests/fixtures/Test-part1of2.vult": {
+            "tests/fixtures/testGG20-part1of2.vult": {
                 "type": "GG20",
                 "vault_name": "Test private key vault",
                 "encrypted": False,
@@ -29,7 +29,7 @@ class VultitoolTester:
                 "expected_shares": 2,
                 "public_key_ecdsa": "0267db81657a956f364167c3986a426b448a74ac0db2092f6665c4c202b37f6f1d"
             },
-            "tests/fixtures/Test-part2of2.vult": {
+            "tests/fixtures/testGG20-part2of2.vult": {
                 "type": "GG20", 
                 "vault_name": "Test private key vault",
                 "encrypted": False,
@@ -37,7 +37,7 @@ class VultitoolTester:
                 "expected_shares": 2,
                 "public_key_ecdsa": "0267db81657a956f364167c3986a426b448a74ac0db2092f6665c4c202b37f6f1d"
             },
-            "tests/fixtures/TestDKLS1of2.vult": {
+            "tests/fixtures/testDKLS-1of2.vult": {
                 "type": "DKLS",
                 "vault_name": "Test Fast Vault DKLS",
                 "encrypted": False,
@@ -45,7 +45,7 @@ class VultitoolTester:
                 "expected_shares": 2,
                 "public_key_ecdsa": "0333e3d4df9cc071be24fd6c995421036074a1a88e5d3e0bc211b7ef4330078d9b"
             },
-            "tests/fixtures/TestDKLS2of2.vult": {
+            "tests/fixtures/testDKLS-2of2.vult": {
                 "type": "DKLS",
                 "vault_name": "Test Fast Vault DKLS", 
                 "encrypted": False,
@@ -53,18 +53,42 @@ class VultitoolTester:
                 "expected_shares": 2,
                 "public_key_ecdsa": "0333e3d4df9cc071be24fd6c995421036074a1a88e5d3e0bc211b7ef4330078d9b"
             },
-            "tests/fixtures/vulticli01-share1of2.vult": {
+            "tests/fixtures/qa-fast-share1of2.vult": {
                 "type": "DKLS",
                 "encrypted": False,
                 "expected_signers": 2,
                 "expected_shares": 2
             },
-            "tests/fixtures/vulticli01-share2of2.vult": {
+            "tests/fixtures/qa-fast-share2of2.vult": {
                 "type": "DKLS",
                 "encrypted": True,  # This one requires password
                 "password": "vulticli01",
                 "expected_signers": 2,
                 "expected_shares": 2
+            },
+            "tests/fixtures/qa-secure-share1of3.vult": {
+                "type": "DKLS",
+                "vault_name": "QA Secure Vault 01",
+                "encrypted": False,
+                "expected_signers": 3,
+                "expected_shares": 2,
+                "public_key_ecdsa": "0303e8bb14669d4e4b1a786dd4e0a9c990c59c1e1ee510dd7fabe335b6ac48a3d7"
+            },
+            "tests/fixtures/qa-secure-share2of3.vult": {
+                "type": "DKLS",
+                "vault_name": "QA Secure Vault 01",
+                "encrypted": False,
+                "expected_signers": 3,
+                "expected_shares": 2,
+                "public_key_ecdsa": "0303e8bb14669d4e4b1a786dd4e0a9c990c59c1e1ee510dd7fabe335b6ac48a3d7"
+            },
+            "tests/fixtures/qa-secure-share3of3.vult": {
+                "type": "DKLS",
+                "vault_name": "QA Secure Vault 01",
+                "encrypted": False,
+                "expected_signers": 3,
+                "expected_shares": 2,
+                "public_key_ecdsa": "0303e8bb14669d4e4b1a786dd4e0a9c990c59c1e1ee510dd7fabe335b6ac48a3d7"
             }
         }
         
@@ -295,7 +319,7 @@ class VultitoolTester:
     
     def test_encrypted_vault(self) -> bool:
         """Test handling of encrypted vaults with passwords"""
-        encrypted_file = "tests/fixtures/vulticli01-share2of2.vult"
+        encrypted_file = "tests/fixtures/qa-fast-share2of2.vult"
         correct_password = "vulticli01"
         
         if not Path(encrypted_file).exists():
