@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 *No unreleased changes at this time.*
 
+## [v0.3.2] - 2025-07-22
+
+### Fixed
+- Go module version format compatibility (changed from '1.23.2' to '1.24')
+- Build system alignment with vultisig-go project dependencies
+- Added Go toolchain specification for proper version handling
+- Excluded compiled binaries from git tracking (added 'vultitool' to .gitignore)
+- Resolved protobuf generation errors and module parsing issues
+
+### Changed
+- Successfully established clean build environment with working CLI interface
+- Improved build system reliability and cross-platform compatibility
+
 ## [v0.3.0] - 2025-07-22 🎉 First Public Release
 
 ### Added
