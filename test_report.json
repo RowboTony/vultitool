@@ -1,13 +1,13 @@
 {
   "test_run": {
-    "timestamp": "2025-07-21T16:18:05.678011",
-    "total_tests": 33,
-    "passed": 28,
-    "failed": 5,
-    "pass_rate": 84.84848484848484
+    "timestamp": "2025-07-22T14:36:53.109200",
+    "total_tests": 48,
+    "passed": 48,
+    "failed": 0,
+    "pass_rate": 100.0
   },
   "test_files": {
-    "Test-part1of2.vult": {
+    "tests/fixtures/testGG20-part1of2.vult": {
       "type": "GG20",
       "vault_name": "Test private key vault",
       "encrypted": false,
@@ -15,7 +15,7 @@
       "expected_shares": 2,
       "public_key_ecdsa": "0267db81657a956f364167c3986a426b448a74ac0db2092f6665c4c202b37f6f1d"
     },
-    "Test-part2of2.vult": {
+    "tests/fixtures/testGG20-part2of2.vult": {
       "type": "GG20",
       "vault_name": "Test private key vault",
       "encrypted": false,
@@ -23,7 +23,7 @@
       "expected_shares": 2,
       "public_key_ecdsa": "0267db81657a956f364167c3986a426b448a74ac0db2092f6665c4c202b37f6f1d"
     },
-    "TestDKLS1of2.vult": {
+    "tests/fixtures/testDKLS-1of2.vult": {
       "type": "DKLS",
       "vault_name": "Test Fast Vault DKLS",
       "encrypted": false,
@@ -31,7 +31,7 @@
       "expected_shares": 2,
       "public_key_ecdsa": "0333e3d4df9cc071be24fd6c995421036074a1a88e5d3e0bc211b7ef4330078d9b"
     },
-    "TestDKLS2of2.vult": {
+    "tests/fixtures/testDKLS-2of2.vult": {
       "type": "DKLS",
       "vault_name": "Test Fast Vault DKLS",
       "encrypted": false,
@@ -39,251 +39,380 @@
       "expected_shares": 2,
       "public_key_ecdsa": "0333e3d4df9cc071be24fd6c995421036074a1a88e5d3e0bc211b7ef4330078d9b"
     },
-    "vulticli01-share1of2.vult": {
+    "tests/fixtures/qa-fast-share1of2.vult": {
       "type": "DKLS",
       "encrypted": false,
       "expected_signers": 2,
       "expected_shares": 2
     },
-    "vulticli01-share2of2.vult": {
+    "tests/fixtures/qa-fast-share2of2.vult": {
       "type": "DKLS",
       "encrypted": true,
       "password": "vulticli01",
       "expected_signers": 2,
       "expected_shares": 2
+    },
+    "tests/fixtures/qa-secure-share1of3.vult": {
+      "type": "DKLS",
+      "vault_name": "QA Secure Vault 01",
+      "encrypted": false,
+      "expected_signers": 3,
+      "expected_shares": 2,
+      "public_key_ecdsa": "0303e8bb14669d4e4b1a786dd4e0a9c990c59c1e1ee510dd7fabe335b6ac48a3d7"
+    },
+    "tests/fixtures/qa-secure-share2of3.vult": {
+      "type": "DKLS",
+      "vault_name": "QA Secure Vault 01",
+      "encrypted": false,
+      "expected_signers": 3,
+      "expected_shares": 2,
+      "public_key_ecdsa": "0303e8bb14669d4e4b1a786dd4e0a9c990c59c1e1ee510dd7fabe335b6ac48a3d7"
+    },
+    "tests/fixtures/qa-secure-share3of3.vult": {
+      "type": "DKLS",
+      "vault_name": "QA Secure Vault 01",
+      "encrypted": false,
+      "expected_signers": 3,
+      "expected_shares": 2,
+      "public_key_ecdsa": "0303e8bb14669d4e4b1a786dd4e0a9c990c59c1e1ee510dd7fabe335b6ac48a3d7"
     }
   },
   "results": [
     {
-      "test": "File existence: Test-part1of2.vult",
+      "test": "File existence: tests/fixtures/testGG20-part1of2.vult",
       "status": "PASS",
-      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/Test-part1of2.vult",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/tests/fixtures/testGG20-part1of2.vult",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.352216"
+      "timestamp": "2025-07-22T14:36:50.828808"
     },
     {
-      "test": "File existence: Test-part2of2.vult",
+      "test": "File existence: tests/fixtures/testGG20-part2of2.vult",
       "status": "PASS",
-      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/Test-part2of2.vult",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/tests/fixtures/testGG20-part2of2.vult",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.352250"
+      "timestamp": "2025-07-22T14:36:50.828847"
     },
     {
-      "test": "File existence: TestDKLS1of2.vult",
+      "test": "File existence: tests/fixtures/testDKLS-1of2.vult",
       "status": "PASS",
-      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/TestDKLS1of2.vult",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/tests/fixtures/testDKLS-1of2.vult",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.352265"
+      "timestamp": "2025-07-22T14:36:50.828865"
     },
     {
-      "test": "File existence: TestDKLS2of2.vult",
+      "test": "File existence: tests/fixtures/testDKLS-2of2.vult",
       "status": "PASS",
-      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/TestDKLS2of2.vult",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/tests/fixtures/testDKLS-2of2.vult",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.352292"
+      "timestamp": "2025-07-22T14:36:50.828898"
     },
     {
-      "test": "File existence: vulticli01-share1of2.vult",
+      "test": "File existence: tests/fixtures/qa-fast-share1of2.vult",
       "status": "PASS",
-      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/vulticli01-share1of2.vult",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/tests/fixtures/qa-fast-share1of2.vult",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.352322"
+      "timestamp": "2025-07-22T14:36:50.828949"
     },
     {
-      "test": "File existence: vulticli01-share2of2.vult",
+      "test": "File existence: tests/fixtures/qa-fast-share2of2.vult",
       "status": "PASS",
-      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/vulticli01-share2of2.vult",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/tests/fixtures/qa-fast-share2of2.vult",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.352352"
+      "timestamp": "2025-07-22T14:36:50.828983"
     },
     {
-      "test": "Basic parse: Test-part1of2.vult",
+      "test": "File existence: tests/fixtures/qa-secure-share1of3.vult",
+      "status": "PASS",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/tests/fixtures/qa-secure-share1of3.vult",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:50.829016"
+    },
+    {
+      "test": "File existence: tests/fixtures/qa-secure-share2of3.vult",
+      "status": "PASS",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/tests/fixtures/qa-secure-share2of3.vult",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:50.829049"
+    },
+    {
+      "test": "File existence: tests/fixtures/qa-secure-share3of3.vult",
+      "status": "PASS",
+      "message": "File found: /home/tgroff/development/vultisig-dev/vultitool/tests/fixtures/qa-secure-share3of3.vult",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:50.829082"
+    },
+    {
+      "test": "Basic parse: tests/fixtures/testGG20-part1of2.vult",
       "status": "PASS",
       "message": "Parsed GG20 vault successfully",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.404574"
+      "timestamp": "2025-07-22T14:36:50.881907"
     },
     {
-      "test": "Basic parse: Test-part2of2.vult",
+      "test": "Basic parse: tests/fixtures/testGG20-part2of2.vult",
       "status": "PASS",
       "message": "Parsed GG20 vault successfully",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.452623"
+      "timestamp": "2025-07-22T14:36:50.937182"
     },
     {
-      "test": "Basic parse: TestDKLS1of2.vult",
+      "test": "Basic parse: tests/fixtures/testDKLS-1of2.vult",
       "status": "PASS",
       "message": "Parsed DKLS vault successfully",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.501470"
+      "timestamp": "2025-07-22T14:36:50.995798"
     },
     {
-      "test": "Basic parse: TestDKLS2of2.vult",
+      "test": "Basic parse: tests/fixtures/testDKLS-2of2.vult",
       "status": "PASS",
       "message": "Parsed DKLS vault successfully",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.549391"
+      "timestamp": "2025-07-22T14:36:51.048490"
     },
     {
-      "test": "Basic parse: vulticli01-share1of2.vult",
+      "test": "Basic parse: tests/fixtures/qa-fast-share1of2.vult",
       "status": "PASS",
       "message": "Parsed DKLS vault successfully",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.594988"
+      "timestamp": "2025-07-22T14:36:51.103001"
     },
     {
-      "test": "Basic parse: vulticli01-share2of2.vult",
-      "status": "FAIL",
-      "message": "Command failed with exit code 1",
-      "details": "stderr: ",
-      "timestamp": "2025-07-21T16:18:04.640836"
+      "test": "Basic parse: tests/fixtures/qa-fast-share2of2.vult",
+      "status": "PASS",
+      "message": "Parsed DKLS vault successfully",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:51.164525"
     },
     {
-      "test": "Summary output: Test-part1of2.vult",
+      "test": "Basic parse: tests/fixtures/qa-secure-share1of3.vult",
+      "status": "PASS",
+      "message": "Parsed DKLS vault successfully",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:51.216292"
+    },
+    {
+      "test": "Basic parse: tests/fixtures/qa-secure-share2of3.vult",
+      "status": "PASS",
+      "message": "Parsed DKLS vault successfully",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:51.270323"
+    },
+    {
+      "test": "Basic parse: tests/fixtures/qa-secure-share3of3.vult",
+      "status": "PASS",
+      "message": "Parsed DKLS vault successfully",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:51.322490"
+    },
+    {
+      "test": "Summary output: tests/fixtures/testGG20-part1of2.vult",
       "status": "PASS",
       "message": "Summary format correct",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.685307"
+      "timestamp": "2025-07-22T14:36:51.371735"
     },
     {
-      "test": "Summary output: Test-part2of2.vult",
+      "test": "Summary output: tests/fixtures/testGG20-part2of2.vult",
       "status": "PASS",
       "message": "Summary format correct",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.731600"
+      "timestamp": "2025-07-22T14:36:51.422063"
     },
     {
-      "test": "Summary output: TestDKLS1of2.vult",
+      "test": "Summary output: tests/fixtures/testDKLS-1of2.vult",
       "status": "PASS",
       "message": "Summary format correct",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.778345"
+      "timestamp": "2025-07-22T14:36:51.474787"
     },
     {
-      "test": "Summary output: TestDKLS2of2.vult",
+      "test": "Summary output: tests/fixtures/testDKLS-2of2.vult",
       "status": "PASS",
       "message": "Summary format correct",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.824396"
+      "timestamp": "2025-07-22T14:36:51.530932"
     },
     {
-      "test": "Summary output: vulticli01-share1of2.vult",
+      "test": "Summary output: tests/fixtures/qa-fast-share1of2.vult",
       "status": "PASS",
       "message": "Summary format correct",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.872914"
+      "timestamp": "2025-07-22T14:36:51.583078"
     },
     {
-      "test": "Summary output: vulticli01-share2of2.vult",
-      "status": "FAIL",
-      "message": "Command failed with exit code 1",
+      "test": "Summary output: tests/fixtures/qa-fast-share2of2.vult",
+      "status": "PASS",
+      "message": "Summary format correct",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.918738"
+      "timestamp": "2025-07-22T14:36:51.639368"
     },
     {
-      "test": "Validation: Test-part1of2.vult",
+      "test": "Summary output: tests/fixtures/qa-secure-share1of3.vult",
+      "status": "PASS",
+      "message": "Summary format correct",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:51.693767"
+    },
+    {
+      "test": "Summary output: tests/fixtures/qa-secure-share2of3.vult",
+      "status": "PASS",
+      "message": "Summary format correct",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:51.749346"
+    },
+    {
+      "test": "Summary output: tests/fixtures/qa-secure-share3of3.vult",
+      "status": "PASS",
+      "message": "Summary format correct",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:51.803439"
+    },
+    {
+      "test": "Validation: tests/fixtures/testGG20-part1of2.vult",
       "status": "PASS",
       "message": "Validation passed",
       "details": "",
-      "timestamp": "2025-07-21T16:18:04.967491"
+      "timestamp": "2025-07-22T14:36:51.860819"
     },
     {
-      "test": "Validation: Test-part2of2.vult",
+      "test": "Validation: tests/fixtures/testGG20-part2of2.vult",
       "status": "PASS",
       "message": "Validation passed",
       "details": "",
-      "timestamp": "2025-07-21T16:18:05.019467"
+      "timestamp": "2025-07-22T14:36:51.915350"
     },
     {
-      "test": "Validation: TestDKLS1of2.vult",
+      "test": "Validation: tests/fixtures/testDKLS-1of2.vult",
       "status": "PASS",
       "message": "Validation passed",
       "details": "",
-      "timestamp": "2025-07-21T16:18:05.071747"
+      "timestamp": "2025-07-22T14:36:51.969599"
     },
     {
-      "test": "Validation: TestDKLS2of2.vult",
+      "test": "Validation: tests/fixtures/testDKLS-2of2.vult",
       "status": "PASS",
       "message": "Validation passed",
       "details": "",
-      "timestamp": "2025-07-21T16:18:05.119763"
+      "timestamp": "2025-07-22T14:36:52.024038"
     },
     {
-      "test": "Validation: vulticli01-share1of2.vult",
+      "test": "Validation: tests/fixtures/qa-fast-share1of2.vult",
       "status": "PASS",
       "message": "Validation passed",
       "details": "",
-      "timestamp": "2025-07-21T16:18:05.171588"
+      "timestamp": "2025-07-22T14:36:52.076419"
     },
     {
-      "test": "Validation: vulticli01-share2of2.vult",
-      "status": "FAIL",
-      "message": "Validation failed (exit: 1)",
-      "details": "Error loading vault: Error parsing message with type 'vultisig.vault.v1.Vault'\n",
-      "timestamp": "2025-07-21T16:18:05.219595"
+      "test": "Validation: tests/fixtures/qa-fast-share2of2.vult",
+      "status": "PASS",
+      "message": "Validation passed",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:52.131934"
     },
     {
-      "test": "Export JSON: Test-part1of2.vult",
+      "test": "Validation: tests/fixtures/qa-secure-share1of3.vult",
+      "status": "PASS",
+      "message": "Validation passed",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:52.184086"
+    },
+    {
+      "test": "Validation: tests/fixtures/qa-secure-share2of3.vult",
+      "status": "PASS",
+      "message": "Validation passed",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:52.240100"
+    },
+    {
+      "test": "Validation: tests/fixtures/qa-secure-share3of3.vult",
+      "status": "PASS",
+      "message": "Validation passed",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:52.292467"
+    },
+    {
+      "test": "Export JSON: tests/fixtures/testGG20-part1of2.vult",
       "status": "PASS",
       "message": "JSON export successful",
       "details": "",
-      "timestamp": "2025-07-21T16:18:05.268614"
+      "timestamp": "2025-07-22T14:36:52.346115"
     },
     {
-      "test": "Export JSON: Test-part2of2.vult",
+      "test": "Export JSON: tests/fixtures/testGG20-part2of2.vult",
       "status": "PASS",
       "message": "JSON export successful",
       "details": "",
-      "timestamp": "2025-07-21T16:18:05.321260"
+      "timestamp": "2025-07-22T14:36:52.404287"
     },
     {
-      "test": "Export JSON: TestDKLS1of2.vult",
+      "test": "Export JSON: tests/fixtures/testDKLS-1of2.vult",
       "status": "PASS",
       "message": "JSON export successful",
       "details": "",
-      "timestamp": "2025-07-21T16:18:05.374288"
+      "timestamp": "2025-07-22T14:36:52.457008"
     },
     {
-      "test": "Export JSON: TestDKLS2of2.vult",
+      "test": "Export JSON: tests/fixtures/testDKLS-2of2.vult",
       "status": "PASS",
       "message": "JSON export successful",
       "details": "",
-      "timestamp": "2025-07-21T16:18:05.428821"
+      "timestamp": "2025-07-22T14:36:52.509329"
     },
     {
-      "test": "Export JSON: vulticli01-share1of2.vult",
+      "test": "Export JSON: tests/fixtures/qa-fast-share1of2.vult",
       "status": "PASS",
       "message": "JSON export successful",
       "details": "",
-      "timestamp": "2025-07-21T16:18:05.479261"
+      "timestamp": "2025-07-22T14:36:52.562880"
     },
     {
-      "test": "Export JSON: vulticli01-share2of2.vult",
-      "status": "FAIL",
-      "message": "Export command failed (exit: 1)",
+      "test": "Export JSON: tests/fixtures/qa-fast-share2of2.vult",
+      "status": "PASS",
+      "message": "JSON export successful",
       "details": "",
-      "timestamp": "2025-07-21T16:18:05.530333"
+      "timestamp": "2025-07-22T14:36:52.619978"
+    },
+    {
+      "test": "Export JSON: tests/fixtures/qa-secure-share1of3.vult",
+      "status": "PASS",
+      "message": "JSON export successful",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:52.673455"
+    },
+    {
+      "test": "Export JSON: tests/fixtures/qa-secure-share2of3.vult",
+      "status": "PASS",
+      "message": "JSON export successful",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:52.727037"
+    },
+    {
+      "test": "Export JSON: tests/fixtures/qa-secure-share3of3.vult",
+      "status": "PASS",
+      "message": "JSON export successful",
+      "details": "",
+      "timestamp": "2025-07-22T14:36:52.784383"
     },
     {
       "test": "Encrypted vault test",
-      "status": "FAIL",
-      "message": "Unexpected error handling encrypted vault",
-      "details": "",
-      "timestamp": "2025-07-21T16:18:05.581594"
+      "status": "PASS",
+      "message": "Password security works correctly",
+      "details": "correct_password: \u2713; wrong_password_rejected: \u2713; empty_password_rejected: \u2713; blank_password_rejected: \u2713",
+      "timestamp": "2025-07-22T14:36:53.005291"
     },
     {
       "test": "Invalid file handling",
       "status": "PASS",
       "message": "Invalid file rejected as expected",
       "details": "exit_code: 1, stderr: ...",
-      "timestamp": "2025-07-21T16:18:05.628274"
+      "timestamp": "2025-07-22T14:36:53.057061"
     },
     {
       "test": "Missing file handling",
       "status": "PASS",
       "message": "Missing file handled as expected",
       "details": "",
-      "timestamp": "2025-07-21T16:18:05.677916"
+      "timestamp": "2025-07-22T14:36:53.109138"
     }
   ]
 }

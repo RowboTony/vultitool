@@ -29,6 +29,12 @@ go.work.sum
 # Allow test fixture .vult files to be tracked
 !tests/fixtures/*.vult
 
+# Build system artifacts
+.coverage
+*.log
+commit.md
+
 # Protobuf/generated output
 generated/
 *.pb.go
+go/generated/

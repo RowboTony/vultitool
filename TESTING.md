@@ -157,7 +157,7 @@ The self-test system integrates seamlessly with vultitool:
 
 ## Possible Future Enhancements
 
-### Planned Features
+### Features
 - [x] Password-protected vault support
 - [ ] Additional edge case testing  
 - [ ] Performance benchmarking

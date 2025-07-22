@@ -4,17 +4,32 @@
 
 A command-line tool for parsing, analyzing, and validating Vultisig `.vult` vault files. Built as a reference implementation to understand and document the Vultisig MPC wallet ecosystem.
 
-## Quick Start
+## Installation & Setup
+
+**Prerequisites:** Python 3.8+, Go 1.19+, Protocol Buffers Compiler (protoc), Git
 
 ```bash
-# Make vultitool executable
-chmod +x ./vultitool
+# Ubuntu/Debian
+sudo apt update && sudo apt install python3 python3-pip golang-go protobuf-compiler git rsync
 
+# Clone and setup
+git clone https://github.com/vultisig/vultitool
+cd vultitool
+
+# One-command setup (installs dependencies + builds protobuf + builds tools)
+make setup && make build
+
+# Verify installation
+./vultitool doctor health
+```
+
+**Manual setup:** See [detailed instructions](#detailed-setup) below.
+
+## Usage Examples
+
+```bash
 # Parse and display a vault file
 ./vultitool vault parse MyVault.vult
-
-# Parse encrypted vault with password
-./vultitool vault parse MyVault.vult --password mypassword
 
 # Brief summary
 ./vultitool vault parse MyVault.vult --summary
@@ -22,11 +37,17 @@ chmod +x ./vultitool
 # JSON output for automation
 ./vultitool vault parse MyVault.vult --json
 
+# Parse encrypted vault with password
+./vultitool vault parse MyVault.vult --password mypassword
+
 # Validate vault format
 ./vultitool vault validate MyVault.vult
 
 # Export vault metadata
 ./vultitool vault export MyVault.vult output.json
+
+# Test with included samples
+./vultitool vault parse tests/fixtures/testGG20-part1of2.vult --summary
 ```
 
 ## What is Vultisig?
@@ -232,26 +253,43 @@ Export vault metadata to structured format.
    - Distributed key shares
    - Creation timestamp
 
-## Installation & Setup
+## Detailed Setup {#detailed-setup}
 
-**Requirements:**
-- Python 3.7+
-- Generated protobuf bindings (from Vultisig commondata)
+### Manual Setup (Step-by-Step)
 
-**Setup:**
+If automated setup fails or you prefer manual control:
+
 ```bash
-# Clone the repository
-git clone <repository-url>
-cd vultitool
+# 1. Install system dependencies
+# Ubuntu/Debian: sudo apt install python3 python3-pip golang-go protobuf-compiler git rsync
+# macOS: brew install python go protobuf git
 
-# Generate protobuf bindings (if needed)
-# See: https://github.com/vultisig/commondata
+# 2. Install Python dependencies
+pip3 install -r requirements.txt
 
-# Make executable
-chmod +x ./vultitool
+# 3. Download Go dependencies
+go mod download
 
-# Test with sample vault
-./vultitool vault parse --summary sample.vult
+# 4. Update protobuf definitions from official Vultisig sources
+./scripts/update-proto.sh
+
+# 5. Generate protobuf bindings
+make protobuf
+
+# 6. Build components
+make build
+
+# 7. Verify everything works
+./vultitool doctor health
+```
+
+### Build System Reference
+
+```bash
+make help           # Show all available commands
+make status         # Check current build status  
+make check-deps     # Verify all required tools are installed
+make clean          # Clean all build artifacts
 ```
 
 ## Project Goals
