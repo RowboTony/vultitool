@@ -1,6 +1,8 @@
 module vultitool
 
-go 1.23.2
+go 1.24
+
+toolchain go1.23.2
 
 require github.com/vultisig/mobile-tss-lib v0.0.0-20250316003201-2e7e570a4a74
 
