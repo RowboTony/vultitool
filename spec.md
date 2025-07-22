@@ -41,14 +41,30 @@
    - Analyze Vultisig’s main repositories, with special focus on [commondata](https://github.com/vultisig/commondata).
    - Document protocols, file formats (`.vult`), flows, and infrastructure (esp. Vultiserver).
 
-3. **CLI Reference Implementation (“vultitool”)**
-   - Cross-platform, **Python/Rust/Go/Node** preferred (based on available libraries and best probability for success and not esoteric).
+3. **CLI Reference Implementation ("vultitool")**
+   - **Hybrid Architecture**: Python CLI for tooling/analysis, Go backend for cryptographic operations
+   - **Python Components**:
+     - Primary CLI interface and user experience
+     - Vault parsing, inspection, validation, and export
+     - Test automation and diagnostics ("doctor" commands)
+     - Human-readable output and reporting
+   - **Go Components**:
+     - Cryptographic operations (encryption/decryption, key derivation)
+     - TSS library integration (using official mobile-tss-lib)
+     - Transaction building and signing
+     - Performance-critical operations
+   - **Interoperability**:
+     - Go library bindings accessible from Python
+     - Cross-validation between implementations
+     - Shared test fixtures and protocol buffers
    - Support at minimum:  
-     - Vault creation/import/export  
-     - .vult parsing and inspection  
-     - Transaction signing simulation  
+     - Vault creation/import/export (Python + Go)
+     - .vult parsing and inspection (Python)
+     - Password-protected vault decryption (Go crypto, Python interface)
+     - Transaction signing simulation (Go)
+     - Multi-signature vault coordination (Go)
      - Basic swap (simulated, then real if possible)  
-   - Output: MVP “hello world” CLI that can parse and print `.vult` data.
+   - Output: Production-ready CLI with secure crypto backend
 
 4. **Test & Audit Suite**
    - Use the CLI as a baseline for test automation (unit/integration/CI).
@@ -110,6 +126,49 @@
 
 ---
 
+## Implementation Roadmap
+
+### Repository Structure
+```
+vultitool/
+├── python/          # Current Python CLI and tooling
+│   ├── vultitool/
+│   ├── tests/
+│   └── requirements.txt
+├── go/              # New Go module for crypto operations
+│   ├── go.mod
+│   ├── go.sum
+│   ├── cmd/         # Go CLI binaries
+│   ├── pkg/         # Go packages
+│   └── internal/    # Internal Go code
+├── shared/          # Shared resources
+│   ├── protos/      # Protocol buffer definitions
+│   └── fixtures/    # Test files used by both
+└── scripts/         # Build and integration scripts
+```
+
+### Phase 1: Go Foundation
+- [x] **Python MVP Complete**: Full `.vult` parsing, validation, export, password support
+- [ ] **Initialize Go module** in `go/` directory
+- [ ] **Port crypto operations** from Python to Go (using official mobile-tss-lib patterns)
+- [ ] **Create Go CLI proof-of-concept** for vault decryption
+- [ ] **Add integration tests** verifying Python and Go produce identical results
+- [ ] **Cross-validation suite** to ensure both implementations agree
+
+### Phase 2: Interoperability
+- [ ] **Go library bindings** for Python (via subprocess or shared library)
+- [ ] **Update Python CLI** to optionally use Go crypto backend
+- [ ] **Maintain backward compatibility** with pure Python fallback
+- [ ] **Performance benchmarking** between Python and Go crypto
+- [ ] **Security audit** of interop layer
+
+### Phase 3: Advanced TSS Features
+- [ ] **TSS operations** in Go using official libraries
+- [ ] **Multi-signature vault reconstruction** from 2-of-3 key shares
+- [ ] **Transaction building** and signing simulation
+- [ ] **Swap transaction construction** with ThorChain/LiFi integration
+- [ ] **End-to-end workflow validation**
+
 ## First Steps / Milestones
 
 1. **Set up local dev environment and clone the main Vultisig repos:**
@@ -121,7 +180,7 @@
     - [vultisig-web](https://github.com/vultisig/vultisig-web)
     - [vultiserver](https://github.com/vultisig/vultiserver)
     - [vultisig-go](https://github.com/vultisig/vultisig-go)
-2. **Write “hello world” CLI to parse and print `.vult` file data.**
+2. **Write "hello world" CLI to parse and print `.vult` file data.**
 3. **Document findings in both `spec.md` and project documentation.**
 4. **Incrementally build and test further CLI capabilities, updating documentation as you learn.**
 
