@@ -37,7 +37,7 @@ class VultitoolTester:
                 "expected_shares": 2,
                 "public_key_ecdsa": "0267db81657a956f364167c3986a426b448a74ac0db2092f6665c4c202b37f6f1d"
             },
-            "tests/fixtures/TestDKLS1of2.vult": {
+            "tests/fixtures/testDKLS-1of2.vult": {
                 "type": "DKLS",
                 "vault_name": "Test Fast Vault DKLS",
                 "encrypted": False,
@@ -45,7 +45,7 @@ class VultitoolTester:
                 "expected_shares": 2,
                 "public_key_ecdsa": "0333e3d4df9cc071be24fd6c995421036074a1a88e5d3e0bc211b7ef4330078d9b"
             },
-            "tests/fixtures/TestDKLS2of2.vult": {
+            "tests/fixtures/testDKLS-2of2.vult": {
                 "type": "DKLS",
                 "vault_name": "Test Fast Vault DKLS", 
                 "encrypted": False,

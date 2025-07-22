@@ -80,7 +80,7 @@ Vultitool includes a comprehensive self-test system to ensure reliability and se
 **Current Status: 100% pass rate (33/33 tests)** ✨
 
 - ✅ **GG20 vault parsing**: `testGG20-part1of2.vult`, `testGG20-part2of2.vult`
-- ✅ **DKLS vault parsing**: `TestDKLS1of2.vult`, `TestDKLS2of2.vult`  
+- ✅ **DKLS vault parsing**: `testDKLS-1of2.vult`, `testDKLS-2of2.vult`
 - ✅ **Encrypted vault support**: `qa-fast-share2of2.vult` with password authentication
 - ✅ **Password security validation**: Tests correct/incorrect/empty/blank password handling
 - ✅ **Output format validation**: JSON, summary, export functionality
@@ -96,7 +96,7 @@ Vultitool includes a comprehensive self-test system to ensure reliability and se
        Parsed DKLS vault successfully
 [PASS] Encrypted vault test
        Password security works correctly
-[PASS] Export JSON: tests/fixtures/TestDKLS1of2.vult
+[PASS] Export JSON: tests/fixtures/testDKLS-1of2.vult
        JSON export successful
 
 === Test Results Summary ===

@@ -28,7 +28,7 @@ Vultitool includes a comprehensive self-test system to ensure the program works 
 
 ### 2. Basic Parsing Tests  
 - ✅ **GG20 vaults**: `testGG20-part1of2.vult`, `testGG20-part2of2.vult`
-- ✅ **DKLS vaults**: `TestDKLS1of2.vult`, `TestDKLS2of2.vult`, `qa-fast-share1of2.vult`
+- ✅ **DKLS vaults**: `testDKLS-1of2.vult`, `testDKLS-2of2.vult`, `qa-fast-share1of2.vult`
 - ✅ **Password-protected**: `qa-fast-share2of2.vult` (password: `vulticli01`) - _Now supported!_
 
 ### 3. Output Format Tests
