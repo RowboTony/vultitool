@@ -28,8 +28,8 @@ Vultitool includes a comprehensive self-test system to ensure the program works 
 
 ### 2. Basic Parsing Tests  
 - ✅ **GG20 vaults**: `Test-part1of2.vult`, `Test-part2of2.vult`
-- ✅ **DKLS vaults**: `TestDKLS1of2.vult`, `TestDKLS2of2.vult`, `vulticli01-share1of2.vult`
-- ❌ **Password-protected**: `vulticli01-share2of2.vult` (password: `vulticli01`) - _Expected failure_
+- ✅ **DKLS vaults**: `TestDKLS1of2.vult`, `TestDKLS2of2.vult`, `qa-fast-share1of2.vult`
+- ✅ **Password-protected**: `qa-fast-share2of2.vult` (password: `vulticli01`) - _Now supported!_
 
 ### 3. Output Format Tests
 - ✅ JSON output format validation
@@ -76,7 +76,7 @@ All failures are related to the password-protected vault file:
 | `Test-part2of2.vult` | GG20 | No | 2 | 2 | ✅ |
 | `TestDKLS1of2.vult` | DKLS | No | 2 | 2 | ✅ |
 | `TestDKLS2of2.vult` | DKLS | No | 2 | 2 | ✅ |
-| `vulticli01-share1of2.vult` | DKLS | No | 2 | 2 | ✅ |
+|| `qa-fast-share1of2.vult` | DKLS | No | 2 | 2 | ✅ |
 | `vulticli01-share2of2.vult` | DKLS | **Yes** | 2 | 2 | ❌ Password required |
 
 ## Example Test Output

@@ -53,13 +53,13 @@ class VultitoolTester:
                 "expected_shares": 2,
                 "public_key_ecdsa": "0333e3d4df9cc071be24fd6c995421036074a1a88e5d3e0bc211b7ef4330078d9b"
             },
-            "tests/fixtures/vulticli01-share1of2.vult": {
+            "tests/fixtures/qa-fast-share1of2.vult": {
                 "type": "DKLS",
                 "encrypted": False,
                 "expected_signers": 2,
                 "expected_shares": 2
             },
-            "tests/fixtures/vulticli01-share2of2.vult": {
+            "tests/fixtures/qa-fast-share2of2.vult": {
                 "type": "DKLS",
                 "encrypted": True,  # This one requires password
                 "password": "vulticli01",
@@ -295,7 +295,7 @@ class VultitoolTester:
     
     def test_encrypted_vault(self) -> bool:
         """Test handling of encrypted vaults with passwords"""
-        encrypted_file = "tests/fixtures/vulticli01-share2of2.vult"
+        encrypted_file = "tests/fixtures/qa-fast-share2of2.vult"
         correct_password = "vulticli01"
         
         if not Path(encrypted_file).exists():

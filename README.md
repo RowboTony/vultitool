@@ -81,7 +81,7 @@ Vultitool includes a comprehensive self-test system to ensure reliability and se
 
 - ✅ **GG20 vault parsing**: `Test-part1of2.vult`, `Test-part2of2.vult`
 - ✅ **DKLS vault parsing**: `TestDKLS1of2.vult`, `TestDKLS2of2.vult`  
-- ✅ **Encrypted vault support**: `vulticli01-share2of2.vult` with password authentication
+- ✅ **Encrypted vault support**: `qa-fast-share2of2.vult` with password authentication
 - ✅ **Password security validation**: Tests correct/incorrect/empty/blank password handling
 - ✅ **Output format validation**: JSON, summary, export functionality
 - ✅ **Error handling**: Invalid files, missing files
@@ -92,7 +92,7 @@ Vultitool includes a comprehensive self-test system to ensure reliability and se
 ```
 [PASS] Basic parse: tests/fixtures/Test-part1of2.vult
        Parsed GG20 vault successfully
-[PASS] Basic parse: tests/fixtures/vulticli01-share2of2.vult 
+[PASS] Basic parse: tests/fixtures/qa-fast-share2of2.vult 
        Parsed DKLS vault successfully
 [PASS] Encrypted vault test
        Password security works correctly

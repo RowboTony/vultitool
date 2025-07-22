@@ -92,7 +92,7 @@ def test_decrypt_vault(vault_path: str, password: str):
 
 if __name__ == "__main__":
     # Test with the known encrypted vault
-    vault_path = "tests/fixtures/vulticli01-share2of2.vult"
+    vault_path = "tests/fixtures/qa-fast-share2of2.vult"
     password = "vulticli01"
     
     test_decrypt_vault(vault_path, password)

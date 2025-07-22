@@ -13,8 +13,8 @@ This directory contains Vultisig `.vult` vault files used for testing and valida
 - **`TestDKLS2of2.vult`** - Part 2 of 2-of-2 DKLS vault ("Test Fast Vault DKLS")
 
 ### Additional Test Cases
-- **`vulticli01-share1of2.vult`** - DKLS vault share 1 (unencrypted)
-- **`vulticli01-share2of2.vult`** - DKLS vault share 2 (password-protected: `vulticli01`)
+- **`qa-fast-share1of2.vult`** - DKLS vault share 1 (unencrypted)
+- **`qa-fast-share2of2.vult`** - DKLS vault share 2 (password-protected: `vulticli01`)
 
 ## Vault Specifications
 
@@ -24,7 +24,7 @@ This directory contains Vultisig `.vult` vault files used for testing and valida
 | `Test-part2of2.vult` | GG20 | No | 2 | 2 | `0267db81...` |
 | `TestDKLS1of2.vult` | DKLS | No | 2 | 2 | `0333e3d4...` |
 | `TestDKLS2of2.vult` | DKLS | No | 2 | 2 | `0333e3d4...` |
-| `vulticli01-share1of2.vult` | DKLS | No | 2 | 2 | - |
+|| `qa-fast-share1of2.vult` | DKLS | No | 2 | 2 | - |
 | `vulticli01-share2of2.vult` | DKLS | **Yes** | 2 | 2 | - |
 
 ## Usage in Tests
@@ -40,4 +40,4 @@ These files are used by `test_vultitool.py` to verify:
 
 ⚠️ **These are test files only** - they contain sample cryptographic data for validation purposes and should not be used for actual value storage.
 
-The password-protected file (`vulticli01-share2of2.vult`) uses password: `vulticli01`
+The password-protected file (`qa-fast-share2of2.vult`) uses password: `vulticli01`
