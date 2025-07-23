@@ -1,6 +1,9 @@
 # Python artifacts
 __pycache__/
 *.pyc
+venv/
+env/
+.env
 
 # Go artifacts
 # Compiled binaries

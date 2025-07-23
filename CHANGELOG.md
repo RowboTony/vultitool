@@ -11,9 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v0.3.6] - 2025-07-23 🍎 macOS Developer Experience Enhancement
 
+### Added
+- **CLI help flag:** Added `vultitool help` and `--help` to display usage information and available commands.
+
 ### Changed
-- **Improved macOS installation UX**: Updated README to promote automated bootstrap script (`./bootstrap-macos.sh`) as "Quick Start" option, with manual installation as alternative
-- **Enhanced developer onboarding**: macOS users can now get started with just 3 commands instead of navigating through detailed setup documentation
+- **Improved macOS installation UX:** Updated README to promote automated bootstrap script (`./bootstrap-macos.sh`) as "Quick Start" option, with manual installation as alternative.
+- **Enhanced developer onboarding:** macOS users can now get started with just 3 commands instead of navigating through detailed setup documentation.
 
 ## [v0.3.5] - 2025-07-23 🔧 Developer Experience & Testing Improvements
 

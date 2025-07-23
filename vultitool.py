@@ -55,6 +55,9 @@ Examples:
     doctor_parser = subparsers.add_parser('doctor', help='System diagnostics')
     DoctorCommands.setup_parser(doctor_parser)
     
+    # Help command
+    help_parser = subparsers.add_parser('help', help='Show help information')
+    
     # Parse arguments
     args = parser.parse_args()
     
@@ -63,6 +66,9 @@ Examples:
         return VaultCommands.handle(args)
     elif args.command == 'doctor':
         return DoctorCommands.handle(args)
+    elif args.command == 'help':
+        parser.print_help()
+        return 0
     else:
         parser.print_help()
         return 1

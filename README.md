@@ -67,6 +67,9 @@ make setup && make build
 ## Usage Examples
 
 ```bash
+# Get help on available commands
+./vultitool help
+
 # Parse and display a vault file
 ./vultitool vault parse MyVault.vult
 
@@ -179,6 +182,19 @@ Pass rate: 100.0%
 See [`TESTING.md`](TESTING.md) for complete testing documentation.
 
 ## Command Reference
+
+### Getting Help
+
+```bash
+# Show main help and available commands
+./vultitool help
+./vultitool --help
+./vultitool -h
+
+# Show help for specific commands
+./vultitool vault --help
+./vultitool doctor --help
+```
 
 ### `vultitool vault parse <file>`
 
