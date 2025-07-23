@@ -67,8 +67,19 @@ class DoctorCommands:
     @staticmethod
     def health(args):
         """Quick health check"""
-        print("🏥 Vultitool Health Check")
-        print(f"Timestamp: {datetime.now().isoformat()}")
+        # Get version from VERSION file
+        try:
+            version_file = Path(__file__).parent.parent / "VERSION"
+            if version_file.exists():
+                version = version_file.read_text().strip()
+            else:
+                version = "unknown"
+        except Exception:
+            version = "unknown"
+            
+        print(":: Vultitool Health Check 🩺 👀 ")
+        print(f":: Version: vultitool {version} ")
+        print(f":: Timestamp: {datetime.now().astimezone().strftime('%Y-%m-%d %H:%M:%S %Z')} ")
         print()
         
         issues = []
@@ -113,6 +124,42 @@ class DoctorCommands:
             print("✅ Python standard library: OK")
         except ImportError as e:
             issues.append(f"Missing Python dependency: {e}")
+        
+        # Check Go binary functionality
+        go_binary_path = Path("./vultitool-go")
+        if not go_binary_path.exists():
+            issues.append("vultitool-go binary not found - run 'make build-go'")
+        elif not go_binary_path.is_file():
+            issues.append("vultitool-go is not a file")
+        elif not go_binary_path.stat().st_mode & 0o111:
+            issues.append("vultitool-go is not executable")
+        else:
+            # Test basic Go functionality
+            try:
+                result = subprocess.run(
+                    ["./vultitool-go", "--help"], 
+                    capture_output=True, 
+                    text=True, 
+                    timeout=5
+                )
+                if result.returncode == 0 and "VultiTool" in result.stdout and "Commands:" in result.stdout:
+                    print("✅ Go binary functionality: OK")
+                else:
+                    issues.append("vultitool-go --help failed or returned unexpected output")
+            except subprocess.TimeoutExpired:
+                issues.append("vultitool-go command timed out")
+            except Exception as e:
+                issues.append(f"Failed to execute vultitool-go: {e}")
+        
+        # Check Go module integrity
+        go_mod_path = Path("go.mod")
+        go_sum_path = Path("go.sum")
+        if go_mod_path.exists() and go_sum_path.exists():
+            print("✅ Go modules: OK")
+        elif go_mod_path.exists() and not go_sum_path.exists():
+            issues.append("go.sum missing - run 'go mod download' or 'make build-go'")
+        else:
+            issues.append("Go module files missing - project may not be properly initialized")
         
         # Try a basic command
         try:

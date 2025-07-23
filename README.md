@@ -1,12 +1,23 @@
-# vultitool
+# `vultitool`
 
 **Vultisig CLI Ecosystem Tool Suite**
 
 A command-line tool for parsing, analyzing, and validating Vultisig `.vult` vault files. Built as a reference implementation to understand and document the Vultisig MPC wallet ecosystem.
 
+## Official Vultisig Integration
+
+**`vultitool` uses the canonical Vultisig sources for maximum compatibility and accuracy:**
+
+- **Protobuf Schemas**: Direct integration with [github.com/vultisig/commondata](https://github.com/vultisig/commondata) - the official protobuf definitions used by all Vultisig applications
+- **Cryptographic Libraries**: Aligned with [github.com/vultisig/mobile-tss-lib](https://github.com/vultisig/mobile-tss-lib) for decryption and vault handling
+- **Version Parity**: Matches dependency versions from [github.com/vultisig/vultisig-go](https://github.com/vultisig/vultisig-go) for protocol compatibility
+- **No Local Copies**: All protobuf definitions are sourced directly from official Vultisig repositories via Go modules
+
+**This ensures 100% compatibility with official Vultisig applications** and serves as the definitive technical reference for the Vultisig ecosystem.
+
 ## Installation & Setup
 
-**Prerequisites:** Python 3.8+, Go 1.19+, Protocol Buffers Compiler (protoc), Git
+**Prerequisites:** Python 3.8+, Go 1.24+, Protocol Buffers Compiler (protoc), Git
 
 ```bash
 # Ubuntu/Debian
@@ -60,9 +71,15 @@ Vultisig is a **seedless crypto wallet** that uses Multi-Party Computation (MPC)
 - **Multi-device support** - Hot (2-of-2) and Secure (2-of-3) vaults
 - **Cross-platform** - iOS, Android, Windows, Web
 
+### Official Vultisig Resources
+
+- **Website**: [https://vultisig.com/](https://vultisig.com/) - Download the app and learn more
+- **Documentation**: [https://docs.vultisig.com/](https://docs.vultisig.com/) - Complete user and developer guides
+- **Source Code**: [https://github.com/vultisig/](https://github.com/vultisig/) - Official repositories and development
+
 ## Decryption Method Consistency
 
-Vultitool uses **exactly the same decryption methods** as the official [mobile-tss-lib](https://github.com/vultisig/mobile-tss-lib) Go implementation. This ensures 100% compatibility with encrypted `.vult` files.
+`vultitool` uses **exactly the same decryption methods** as the official [mobile-tss-lib](https://github.com/vultisig/mobile-tss-lib) Go implementation. This ensures 100% compatibility with encrypted `.vult` files.
 
 ### Technical Details
 
@@ -77,11 +94,11 @@ Vultitool uses **exactly the same decryption methods** as the official [mobile-t
 4. Extract nonce from beginning of encrypted data
 5. Decrypt using `gcm.Open` equivalent with automatic tag verification
 
-This approach eliminates any guesswork and ensures vultitool can decrypt any `.vult` file that the official Vultisig tools can handle.
+This approach eliminates any guesswork and ensures `vultitool` can decrypt any `.vult` file that the official Vultisig tools can handle.
 
 ## Self-Test System
 
-Vultitool includes a comprehensive self-test system to ensure reliability and serve as a "truth machine" for Vultisig vault analysis.
+`vultitool` includes a comprehensive self-test system to ensure reliability and serve as a "truth machine" for Vultisig vault analysis.
 
 ### Quick Self-Test
 
@@ -98,17 +115,19 @@ Vultitool includes a comprehensive self-test system to ensure reliability and se
 
 ### Test Coverage
 
-**Current Status: 100% pass rate (48/48 tests)** ✨
+**Current Status: 100% pass rate (48/48 tests)**
 
-- ✅ **GG20 vault parsing**: `testGG20-part1of2.vult`, `testGG20-part2of2.vult`
-- ✅ **DKLS vault parsing**: `testDKLS-1of2.vult`, `testDKLS-2of2.vult`
-- ✅ **Fast Vault (2-of-2)**: `qa-fast-share1of2.vult`, `qa-fast-share2of2.vult`
-- ✅ **Secure Vault (3-of-3)**: `qa-secure-share1of3.vult`, `qa-secure-share2of3.vult`, `qa-secure-share3of3.vult`
-- ✅ **Encrypted vault support**: Password-protected vaults with authentication
-- ✅ **Password security validation**: Tests correct/incorrect/empty/blank password handling
-- ✅ **Output format validation**: JSON, summary, export functionality
-- ✅ **Error handling**: Invalid files, missing files
-- ✅ **Automated testing**: Fully automated selftest with no manual intervention required
+- **GG20 vault parsing**: `testGG20-part1of2.vult`, `testGG20-part2of2.vult`
+- **DKLS vault parsing**: `testDKLS-1of2.vult`, `testDKLS-2of2.vult`
+
+**Test File Attribution**: The `testGG20` and `testDKLS` files were sourced from [SxMShaDoW/Vultisig-Share-Decoder](https://github.com/SxMShaDoW/Vultisig-Share-Decoder) with appreciation for the contribution to the Vultisig testing ecosystem.
+- **Fast Vault (2-of-2)**: `qa-fast-share1of2.vult`, `qa-fast-share2of2.vult`
+- **Secure Vault (3-of-3)**: `qa-secure-share1of3.vult`, `qa-secure-share2of3.vult`, `qa-secure-share3of3.vult`
+- **Encrypted vault support**: Password-protected vaults with authentication
+- **Password security validation**: Tests correct/incorrect/empty/blank password handling
+- **Output format validation**: JSON, summary, export functionality
+- **Error handling**: Invalid files, missing files
+- **Automated testing**: Fully automated selftest with no manual intervention required
 
 ### Example Test Output
 
@@ -155,18 +174,18 @@ File Size: 26644 chars → 19982 bytes
 Container Version: 1
 Encrypted: No
 
-📁 Vault Name: 'Test private key vault'
-🔐 Crypto Type: GG20
-🔑 ECDSA Public Key: 0267db81657a956f364167c3986a426b448a74ac0db2092f6665c4c202b37f6f1d
-🔑 EdDSA Public Key: c6da2ad7b18728f6481d747a7335fd52a5eed82f3c3d95a51deed03399c5c0b6
-🆔 Local Party ID: Pixel 5a-a9b
-📅 Created: 2024-10-19T07:22:50
+Vault Name: 'Test private key vault'
+Crypto Type: GG20
+ECDSA Public Key: 0267db81657a956f364167c3986a426b448a74ac0db2092f6665c4c202b37f6f1d
+EdDSA Public Key: c6da2ad7b18728f6481d747a7335fd52a5eed82f3c3d95a51deed03399c5c0b6
+Local Party ID: Pixel 5a-a9b
+Created: 2024-10-19T07:22:50
 
-👥 Signers (2):
+Signers (2):
   1. Pixel 5a-a9b
   2. iPhone-EC4
 
-🗝️  Key Shares (2):
+Key Shares (2):
   Share 1: Public Key: 0267db81... (12953 chars)
   Share 2: Public Key: c6da2ad7... (1611 chars)
 ```
@@ -176,7 +195,7 @@ Encrypted: No
 Deep technical analysis of vault structure (always detailed/verbose output).
 
 **Options:**
-- `--show-keyshares` - Display sensitive key share data ⚠️
+- `--show-keyshares` - Display sensitive key share data (WARNING: sensitive)
 - `--password` - Vault password for encrypted vaults
 
 **Use Cases:**
@@ -200,7 +219,7 @@ Validate vault file format and structure.
 
 **Output:**
 ```
-✅ Vault validation passed
+Vault validation passed
 ```
 
 ### `vultitool vault export <file> <output>`
@@ -303,9 +322,9 @@ This tool is part of a broader effort to:
 
 ## Security Notes
 
-⚠️ **Key Share Data**: The `--show-keyshares` flag displays sensitive cryptographic material. Use only in secure environments.
+**WARNING - Key Share Data**: The `--show-keyshares` flag displays sensitive cryptographic material. Use only in secure environments.
 
-⚠️ **File Handling**: `.vult` files contain cryptographic keys. Handle with appropriate security practices.
+**WARNING - File Handling**: `.vult` files contain cryptographic keys. Handle with appropriate security practices.
 
 ## Contributing
 
