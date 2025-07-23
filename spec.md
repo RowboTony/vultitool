@@ -1,10 +1,10 @@
-# spec.md — Vultisig CLI & Ecosystem Analysis Project (Codename: vultitool)
+# spec.md — Vultisig CLI & Ecosystem Analysis Project (Codename: `vultitool`)
 
 ---
 
 ## Project Title
 
-**Vultisig CLI & Ecosystem Test Suite (Codename: vultitool)**
+**Vultisig CLI & Ecosystem Test Suite (Codename: `vultitool`)**
 
 ---
 
@@ -12,22 +12,24 @@
 
 > *Become the definitive source of technical truth for Vultisig—starting with a foundational CLI tool and comprehensive ecosystem analysis. Enable better documentation, developer onboarding, and automated testing for the next phase of Vultisig’s growth.*
 
-- **Primary goal:**  
-  Understand Vultisig at the deepest level (“O’Reilly book” depth) to enable better contribution, documentation, and tooling.
-- **Secondary goal:**  
-  Build a cross-platform CLI (“vultitool”) as the reference implementation for Vultisig vault, transaction, and swap functions.
-- **Long-term:**  
-  Establish a knowledge base for both humans and AI, and lay the foundation for an automated, test-driven Vultisig ecosystem.
+- **Primary goal:** Understand Vultisig at the deepest level (“O’Reilly book” depth) to enable better contribution, documentation, and tooling.
+- **Secondary goal:** Build a cross-platform CLI (`vultitool`) as the reference implementation for Vultisig vault, transaction, and swap functions.
+- **Long-term:** Establish a knowledge base for both humans and AI, and lay the foundation for an automated, test-driven Vultisig ecosystem.
 
 ---
 
 ## Background
 
 - Vultisig is a novel, seedless crypto wallet leveraging MPC TSS (GG20/DKLS, ECDSA/EdDSA) for transaction signing.  
-- Core innovation: No seed phrases—vault “parts” (`.vult` files) instead.
+- Core innovation: No seed phrases—vault "parts" (`.vult` files) instead.
 - Supports hot (2-of-2) and secure (2-of-3) vaults.
 - Primary codebase split: iOS, Windows, Android, Web (browser extension).
-- Swapping powered by ThorChain and LiFi.
+- Swapping powered by ThorChain, LiFi, and more.
+
+**Official Vultisig Resources:**
+- **Website**: [https://vultisig.com/](https://vultisig.com/) - Download the app and learn more
+- **Documentation**: [https://docs.vultisig.com/](https://docs.vultisig.com/) - Complete user and developer guides
+- **Source Code**: [https://github.com/vultisig/](https://github.com/vultisig/) - Official repositories and development
 
 ---
 
@@ -38,7 +40,10 @@
    - Gather and synthesize all public Vultisig information (docs, code, Discord, blogs).
 
 2. **Ecosystem Reverse Engineering**
-   - Analyze Vultisig’s main repositories, with special focus on [commondata](https://github.com/vultisig/commondata).
+   - Analyze Vultisig's main repositories, with special focus on the core infrastructure:
+     - [commondata](https://github.com/vultisig/commondata) - Protocol buffer definitions and shared data structures
+     - [mobile-tss-lib](https://github.com/vultisig/mobile-tss-lib) - Core TSS/MPC cryptographic operations for mobile platforms
+     - [vultisig-go](https://github.com/vultisig/vultisig-go) - Advanced DKLS-based vault management CLI and reference implementation
    - Document protocols, file formats (`.vult`), flows, and infrastructure (esp. Vultiserver).
 
 3. **CLI Reference Implementation ("vultitool")**
@@ -149,7 +154,7 @@ vultitool/
 
 ### Phase 1: Go Foundation
 - [x] **Python MVP Complete**: Full `.vult` parsing, validation, export, password support
-- [ ] **Initialize Go module** in `go/` directory
+- [X] **Initialize Go module** in `go/` directory
 - [ ] **Port crypto operations** from Python to Go (using official mobile-tss-lib patterns)
 - [ ] **Create Go CLI proof-of-concept** for vault decryption
 - [ ] **Add integration tests** verifying Python and Go produce identical results
@@ -171,7 +176,7 @@ vultitool/
 
 ## First Steps / Milestones
 
-1. **Set up local dev environment and clone the main Vultisig repos:**
+1. **[x] Set up local dev environment and clone the main Vultisig repos:**
     - [commondata](https://github.com/vultisig/commondata)
     - [mobile-tss-lib](https://github.com/vultisig/mobile-tss-lib)
     - [vultisig-ios](https://github.com/vultisig/vultisig-ios)
@@ -180,8 +185,8 @@ vultitool/
     - [vultisig-web](https://github.com/vultisig/vultisig-web)
     - [vultiserver](https://github.com/vultisig/vultiserver)
     - [vultisig-go](https://github.com/vultisig/vultisig-go)
-2. **Write "hello world" CLI to parse and print `.vult` file data.**
-3. **Document findings in both `spec.md` and project documentation.**
+2. **[x] Write "hello world" CLI to parse and print `.vult` file data.**
+3. **[x] Document findings in both `spec.md` and project documentation.**
 4. **Incrementally build and test further CLI capabilities, updating documentation as you learn.**
 
 ---
@@ -241,13 +246,13 @@ However, the official `vultisig-go` repository is missing essential developer on
 
 ### Why This Matters
 
-- **Vultisig-go is Valhalla for developers**: All protocol knowledge, live reference implementation, but hard to approach without a guide.
+- **Vultisig-go is very relevant for developers**: All protocol knowledge, live reference implementation, but hard to approach without a guide.
 - **My fork will be the “O’Reilly Book” for Vultisig-Go**: Onboarding, dev experience, real documentation.
 - **Synergy with vultitool**: Python for analysis, Go for protocol truth, both fully testable and auditable.
 
 ### Roadmap Additions
 
-- [ ] Fork `vultisig-go` and initialize documentation
+- [x] Fork `vultisig-go` and initialize documentation
 - [ ] Document missing native dependencies and build steps
 - [ ] Develop test harness for vultitool/vultisig-go parity
 - [ ] Publish onboarding blog or tutorial for new devs

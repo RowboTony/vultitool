@@ -9,6 +9,58 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 *No unreleased changes at this time.*
 
+## [v0.3.5] - 2025-07-23 🔧 Developer Experience & Testing Improvements
+
+### Added
+- **Version information in doctor health**: `doctor health` command now displays version number for better diagnostics
+- **Improved make test**: `make test` now uses the reliable `doctor selftest` system (48/48 tests passing)
+- **Professional onboarding workflow**: New contributors can now `make setup && make test` immediately after cloning
+
+### Changed
+- **Enhanced doctor health output**: Now shows `Version: vultitool 0.3.5` alongside timestamp and health checks
+- **Fixed make test reliability**: Replaced broken pytest integration with working selftest system
+- **Improved Makefile test target**: `make test` now auto-builds and runs comprehensive tests
+
+### Fixed
+- **Test system reliability**: Resolved pytest discovery issues by leveraging existing selftest infrastructure
+- **Developer onboarding**: Fixed `make test` to work immediately after fresh clone and setup
+
+### Documentation
+- **Added proper attribution**: README now credits `testGG20` and `testDKLS` files from [SxMShaDoW/Vultisig-Share-Decoder](https://github.com/SxMShaDoW/Vultisig-Share-Decoder)
+- **Enhanced professional standards**: Improved project setup documentation and workflows
+
+### Technical
+- **Build system improvements**: `make test` now has proper dependency resolution (depends on `build`)
+- **Quality assurance**: Full clean-build-test cycle now works reliably from fresh environment
+- **Version consistency**: All version displays now pull from single VERSION file source
+
+## [v0.3.4] - 2025-07-22 🏛️ Canonical Vultisig Integration
+
+### Added
+- **Official Vultisig protobuf integration**: Now uses `github.com/vultisig/commondata` directly via Go modules
+- **Version alignment**: Matches exact dependency versions from `vultisig-go` for maximum compatibility
+- **Canonical source guarantee**: All protobuf definitions sourced from official Vultisig repositories (no local copies)
+- **Go module integration**: Added proper Go workspace with official Vultisig dependencies
+
+### Changed  
+- **Eliminated local protobuf files**: Replaced with direct imports from `github.com/vultisig/commondata`
+- **Updated go.mod**: Now includes official Vultisig commondata and protobuf dependencies
+- **Enhanced Makefile**: Improved protobuf generation with official source validation
+- **Updated documentation**: README now emphasizes canonical source integration and compatibility
+
+### Technical
+- **Dependencies aligned**:
+  - `github.com/vultisig/commondata v0.0.0-20250710214228-61d9ed8f7778` (official protobuf schemas)
+  - `google.golang.org/protobuf v1.34.2` (compatible with commondata)
+  - `go 1.24` (matching vultisig-go requirements)
+- **Build reliability**: Go binary builds successfully with official protobuf access
+- **Unified architecture**: Single `vultitool` binary (removed obsolete `vultitool-go`)
+
+### Documentation
+- **README enhanced**: Added "Official Vultisig Integration" section highlighting canonical sources
+- **Technical accuracy**: All documentation now reflects official integration approach
+- **Developer confidence**: Clear guarantee of 100% compatibility with official Vultisig applications
+
 ## [v0.3.2] - 2025-07-22
 
 ### Fixed

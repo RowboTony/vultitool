@@ -4,7 +4,7 @@ __pycache__/
 
 # Go artifacts
 # Compiled binaries
-vultitool
+/vultitool
 vultitool-go
 vultitool.exe
 *.exe

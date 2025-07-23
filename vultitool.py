@@ -13,6 +13,18 @@ sys.path.insert(0, str(Path(__file__).parent / "commands"))
 from vault import VaultCommands
 from doctor import DoctorCommands
 
+
+def get_version():
+    """Get version from VERSION file"""
+    try:
+        version_file = Path(__file__).parent / "VERSION"
+        if version_file.exists():
+            return version_file.read_text().strip()
+        else:
+            return "unknown"
+    except Exception:
+        return "unknown"
+
 def main():
     """Main entry point for vultitool"""
     parser = argparse.ArgumentParser(
@@ -27,6 +39,10 @@ Examples:
   vultitool doctor check
         """
     )
+    
+    # Add version flag
+    parser.add_argument('--version', '-v', action='version', 
+                       version=f'vultitool {get_version()}')
     
     # Create subparsers for different commands
     subparsers = parser.add_subparsers(dest='command', help='Available commands')
