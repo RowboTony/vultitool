@@ -44,7 +44,14 @@ if [ ! -d "$TMP_DIR/proto" ]; then
 fi
 
 # Copy all proto files, maintaining directory structure
-rsync -av --delete "$TMP_DIR/proto/" "$PROTO_DIR/"
+# Use rsync if available, otherwise fallback to cp
+if command -v rsync > /dev/null 2>&1; then
+    rsync -av --delete "$TMP_DIR/proto/" "$PROTO_DIR/"
+else
+    echo -e "${YELLOW}rsync not found, using cp as fallback${RESET}"
+    rm -rf "$PROTO_DIR"/*
+    cp -r "$TMP_DIR/proto/"* "$PROTO_DIR/"
+fi
 
 # List what was copied
 echo -e "${GREEN}✅ Updated protobuf files:${RESET}"

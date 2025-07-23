@@ -13,7 +13,11 @@ GENERATED_DIR := generated
 PROTO_DIR := proto
 GO_BINARY := vultitool-go
 PYTHON_SCRIPT := vultitool.py
+PYTHON_WRAPPER := vultitool-wrapper.py
 PYTHON_BINARY := vultitool
+
+# Determine which Python to use
+VENV_PYTHON := $(if $(wildcard $(VENV_DIR)/bin/python3),$(VENV_DIR)/bin/python3,$(PYTHON))
 
 # Colors for output
 RED := \033[31m
@@ -33,8 +37,13 @@ setup: dev-setup protobuf ## Complete setup for development environment
 
 dev-setup: ## Set up development environment
 	@echo "$(BLUE)Setting up development environment...$(RESET)"
-	@$(PYTHON) -m pip install --upgrade pip
-	@$(PYTHON) -m pip install -r requirements.txt
+	@if [ ! -d "$(VENV_DIR)" ]; then \
+		echo "$(BLUE)Creating Python virtual environment...$(RESET)"; \
+		$(PYTHON) -m venv $(VENV_DIR); \
+	fi
+	@echo "$(BLUE)Installing Python dependencies...$(RESET)"
+	@$(VENV_DIR)/bin/pip install --upgrade pip
+	@$(VENV_DIR)/bin/pip install -r requirements.txt
 	@echo "$(GREEN)✅ Python dependencies installed$(RESET)"
 	@$(GO) mod download
 	@echo "$(GREEN)✅ Go dependencies downloaded$(RESET)"
@@ -69,8 +78,9 @@ build: build-python build-go ## Build both Python and Go components
 build-python: protobuf-python ## Build Python component
 	@echo "$(BLUE)Building Python component...$(RESET)"
 	@chmod +x $(PYTHON_SCRIPT)
-	@# Create main interface symlink: vultitool -> vultitool.py
-	@ln -sf $(PYTHON_SCRIPT) $(PYTHON_BINARY)
+	@chmod +x $(PYTHON_WRAPPER)
+	@# Create main interface symlink: vultitool -> vultitool-wrapper.py
+	@ln -sf $(PYTHON_WRAPPER) $(PYTHON_BINARY)
 	@echo "$(GREEN)✅ Python component ready$(RESET)"
 
 build-go: ## Build Go component
@@ -114,6 +124,11 @@ clean: ## Clean build artifacts and generated files
 	@rm -rf .coverage
 	@$(GO) clean
 	@echo "$(GREEN)✅ Clean completed$(RESET)"
+
+clean-all: clean ## Clean everything including virtual environment
+	@echo "$(BLUE)Cleaning virtual environment...$(RESET)"
+	@rm -rf $(VENV_DIR)
+	@echo "$(GREEN)✅ Complete clean finished$(RESET)"
 
 install: build ## Install vultitool (requires setup)
 	@echo "$(BLUE)Installing VultiTool...$(RESET)"
@@ -162,9 +177,13 @@ ci-test: ## Full test suite for CI/CD
 # Check dependencies
 check-deps: ## Check if required tools are installed
 	@echo "$(BLUE)Checking dependencies...$(RESET)"
-	@command -v $(PYTHON) >/dev/null 2>&1 || { echo "$(RED)❌ Python 3 not found$(RESET)"; exit 1; }
-	@command -v $(GO) >/dev/null 2>&1 || { echo "$(RED)❌ Go not found$(RESET)"; exit 1; }
-	@command -v $(PROTOC) >/dev/null 2>&1 || { echo "$(RED)❌ protoc not found$(RESET)"; exit 1; }
+	@command -v $(PYTHON) > /dev/null 2>&1 || { echo "$(RED)❌ Python 3 not found$(RESET)"; exit 1; }
+	@command -v $(GO) > /dev/null 2>&1 || { echo "$(RED)❌ Go not found$(RESET)"; exit 1; }
+	@command -v $(PROTOC) > /dev/null 2>&1 || { echo "$(RED)❌ protoc not found$(RESET)"; exit 1; }
+	@command -v git > /dev/null 2>&1 || { echo "$(RED)❌ git not found$(RESET)"; exit 1; }
+	@if [[ "$$OSTYPE" == "linux-gnu"* ]]; then \
+		command -v rsync > /dev/null 2>&1 || { echo "$(YELLOW)⚠️  rsync not found (may be needed for proto updates)$(RESET)"; }; \
+	fi
 	@echo "$(GREEN)✅ All required dependencies found$(RESET)"
 
 # Show current status

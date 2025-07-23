@@ -19,9 +19,37 @@ A command-line tool for parsing, analyzing, and validating Vultisig `.vult` vaul
 
 **Prerequisites:** Python 3.8+, Go 1.24+, Protocol Buffers Compiler (protoc), Git
 
+### Ubuntu/Debian Installation
+
 ```bash
-# Ubuntu/Debian
+# Install system dependencies
 sudo apt update && sudo apt install python3 python3-pip golang-go protobuf-compiler git rsync
+
+# Clone and setup
+git clone https://github.com/vultisig/vultitool
+cd vultitool
+
+# One-command setup (installs dependencies + builds protobuf + builds tools)
+make setup && make build
+
+# Verify installation
+./vultitool doctor health
+```
+
+### macOS Installation (Quick Start)
+
+```bash
+# One-command bootstrap (installs everything)
+git clone https://github.com/vultisig/vultitool
+cd vultitool
+./bootstrap-macos.sh
+```
+
+### macOS Installation (Manual)
+
+```bash
+# Install dependencies via Homebrew
+brew install python go protobuf git
 
 # Clone and setup
 git clone https://github.com/vultisig/vultitool
@@ -69,7 +97,7 @@ Vultisig is a **seedless crypto wallet** that uses Multi-Party Computation (MPC)
 - **No seed phrases** - Uses distributed key shares instead
 - **MPC-based signing** - Supports both GG20 and DKLS protocols
 - **Multi-device support** - Hot (2-of-2) and Secure (2-of-3) vaults
-- **Cross-platform** - iOS, Android, Windows, Web
+- **Cross-platform** - Android, iOS, macOS, Web, Windows
 
 ### Official Vultisig Resources
 
@@ -310,6 +338,77 @@ make status         # Check current build status
 make check-deps     # Verify all required tools are installed
 make clean          # Clean all build artifacts
 ```
+
+### macOS Bootstrap Guide
+
+For a fresh macOS system, here's the complete bootstrap process from first clone:
+
+**Option 1: Automated Bootstrap Script**
+
+```bash
+git clone https://github.com/vultisig/vultitool
+cd vultitool
+./bootstrap-macos.sh
+```
+
+**Option 2: Manual Step-by-Step**
+
+```bash
+# 1. Install Homebrew (if not already installed)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# 2. Install required dependencies
+brew install python go protobuf git
+
+# 3. Clone the repository
+git clone https://github.com/vultisig/vultitool
+cd vultitool
+
+# 4. Bootstrap the entire project
+make check-deps     # Verify all tools are installed
+make setup          # Install Python deps + generate protobuf
+make build          # Build both Python and Go components
+
+# 5. Verify everything works
+./vultitool doctor health
+./vultitool doctor selftest
+
+# 6. Test with sample vault file
+./vultitool vault parse tests/fixtures/testGG20-part1of2.vult --summary
+```
+
+**Expected Output:**
+```
+✅ All required dependencies found
+✅ Setup complete!
+✅ Python component ready
+✅ Go binary built: vultitool-go
+
+=== Health Check Results ===
+✅ vultitool binary: OK
+✅ Protobuf bindings: 14 files found
+✅ Test files: 9 .vult files available
+✅ All health checks passed!
+
+=== Test Results Summary ===
+Total tests: 48
+Passed: 48
+Failed: 0
+Pass rate: 100.0%
+
+📁 Vault: Test private key vault
+🔐 Type: GG20
+👥 Signers: 2
+🗝️  Shares: 2
+📅 Created: 2024-10-19T07:22:50
+```
+
+### macOS-Specific Notes
+
+- **Virtual Environment**: macOS setup automatically creates a Python virtual environment (`venv/`) to avoid conflicts with system Python
+- **Protobuf Warnings**: You may see compatibility warnings about protobuf versions - these can be safely ignored
+- **Homebrew Path**: Ensure `/opt/homebrew/bin` is in your PATH for Apple Silicon Macs
+- **Dependencies**: All dependencies are managed via Homebrew for consistent installation
 
 ## Project Goals
 

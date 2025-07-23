@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 *No unreleased changes at this time.*
 
+## [v0.3.6] - 2025-07-23 🍎 macOS Developer Experience Enhancement
+
+### Changed
+- **Improved macOS installation UX**: Updated README to promote automated bootstrap script (`./bootstrap-macos.sh`) as "Quick Start" option, with manual installation as alternative
+- **Enhanced developer onboarding**: macOS users can now get started with just 3 commands instead of navigating through detailed setup documentation
+
 ## [v0.3.5] - 2025-07-23 🔧 Developer Experience & Testing Improvements
 
 ### Added
