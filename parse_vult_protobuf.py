@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-VultIsig .vult File Parser using Official Protobuf Schema
-Parses .vult files using the exact protobuf definitions from VultIsig's commondata repo
+Vultisig .vult File Parser using Official Protobuf Schema
+Parses .vult files using the exact protobuf definitions from Vultisig's commondata repo
 """
 
 import base64

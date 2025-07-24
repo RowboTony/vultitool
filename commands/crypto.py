@@ -27,7 +27,7 @@ class VaultDecryptor:
     
     def decrypt_vault_data(self, encrypted_data: bytes, password: str) -> Optional[bytes]:
         """
-        Decrypt vault data using the official VultIsig algorithm from mobile-tss-lib
+        Decrypt vault data using the official Vultisig algorithm from mobile-tss-lib
         
         Args:
             encrypted_data: The encrypted vault binary data
@@ -37,12 +37,12 @@ class VaultDecryptor:
             Decrypted data if successful, None if failed
         """
         
-        # Use only the official VultIsig method (matches mobile-tss-lib exactly)
+        # Use only the official Vultisig method (matches mobile-tss-lib exactly)
         try:
             result = self._vultisig_aes_gcm_sha256(encrypted_data, password)
             if result and self.validate_decrypted_data(result):
                 if not self.silent:
-                    print(f"✅ Decryption successful using official VultIsig method", file=sys.stderr)
+                    print(f"✅ Decryption successful using official Vultisig method", file=sys.stderr)
                 return result
         except Exception as e:
             if not self.silent:
@@ -52,7 +52,7 @@ class VaultDecryptor:
     
     def _vultisig_aes_gcm_sha256(self, data: bytes, password: str) -> Optional[bytes]:
         """
-        Official VultIsig decryption method (exact match to mobile-tss-lib Go implementation):
+        Official Vultisig decryption method (exact match to mobile-tss-lib Go implementation):
         
         Go code equivalent:
         hash := sha256.Sum256([]byte(password))

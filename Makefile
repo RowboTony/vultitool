@@ -1,4 +1,4 @@
-# Makefile for VultiTool - Cross-language build automation
+# Makefile for vultitool - Cross-language build automation
 # Supports both Python and Go components with protobuf generation
 
 .PHONY: help setup build test clean install protobuf-python protobuf-go dev-setup
@@ -27,12 +27,12 @@ BLUE := \033[34m
 RESET := \033[0m
 
 help: ## Show this help message
-	@echo "$(BLUE)VultiTool Build System$(RESET)"
+	@echo "$(BLUE)vultitool Build System$(RESET)"
 	@echo ""
 	@echo "$(YELLOW)Available targets:$(RESET)"
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  $(GREEN)%-20s$(RESET) %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-setup: dev-setup protobuf ## Complete setup for development environment
+setup: dev-setup setup-protobuf protobuf ## Complete setup for development environment
 	@echo "$(GREEN)✅ Setup complete!$(RESET)"
 
 dev-setup: ## Set up development environment
@@ -47,6 +47,11 @@ dev-setup: ## Set up development environment
 	@echo "$(GREEN)✅ Python dependencies installed$(RESET)"
 	@$(GO) mod download
 	@echo "$(GREEN)✅ Go dependencies downloaded$(RESET)"
+
+setup-protobuf: ## Auto-detect and install matching protobuf version
+	@echo "$(BLUE)Setting up protobuf version compatibility...$(RESET)"
+	@$(VENV_PYTHON) scripts/setup-protobuf.py
+	@echo "$(GREEN)✅ Protobuf version setup complete$(RESET)"
 
 protobuf: protobuf-python protobuf-go ## Generate protobuf files for both Python and Go
 
@@ -89,9 +94,38 @@ build-go: ## Build Go component
 	@echo "$(GREEN)✅ Go binary built: $(GO_BINARY)$(RESET)"
 
 test: build ## Run comprehensive tests (uses built-in selftest system)
-	@echo "$(BLUE)Running VultiTool test suite...$(RESET)"
+	@echo "$(BLUE)Running vultitool test suite...$(RESET)"
 	@./$(PYTHON_BINARY) doctor selftest
 	@echo "$(GREEN)✅ All tests completed successfully$(RESET)"
+
+test-clean: ## Clean slate test - rebuild everything and validate
+	@echo "$(BLUE)🧹 Clean Slate Validation Test$(RESET)"
+	@echo "$(YELLOW)This ensures a fresh environment works properly$(RESET)"
+	@$(MAKE) clean-all
+	@$(MAKE) setup
+	@$(MAKE) build
+	@echo "$(BLUE)🔍 Running comprehensive validation...$(RESET)"
+	@./$(PYTHON_BINARY) doctor selftest
+	@echo "$(BLUE)🔍 Testing for protobuf warnings...$(RESET)"
+	@./$(PYTHON_BINARY) vault parse tests/fixtures/testGG20-part1of2.vult --json >/dev/null 2>warnings.tmp || true
+	@if [ -s warnings.tmp ]; then \
+		echo "$(RED)❌ Protobuf warnings detected:$(RESET)"; \
+		cat warnings.tmp; \
+		rm -f warnings.tmp; \
+		exit 1; \
+	else \
+		echo "$(GREEN)✅ No protobuf warnings$(RESET)"; \
+		rm -f warnings.tmp; \
+	fi
+	@echo "$(BLUE)🔍 Checking naming conventions...$(RESET)"
+	@if grep -r "VultiTool\|VultItool" --include="*.py" --include="*.go" --include="*.sh" . --exclude-dir=.git --exclude="CHANGELOG.md" --exclude="*/pre-commit-check.sh" > /dev/null 2>&1; then \
+		echo "$(RED)❌ Incorrect naming found:$(RESET)"; \
+		grep -r "VultiTool\|VultItool" --include="*.py" --include="*.go" --include="*.sh" . --exclude-dir=.git --exclude="CHANGELOG.md" --exclude="*/pre-commit-check.sh"; \
+		exit 1; \
+	else \
+		echo "$(GREEN)✅ Naming conventions correct$(RESET)"; \
+	fi
+	@echo "$(GREEN)🎉 Clean slate validation PASSED$(RESET)"
 
 test-python: ## Run Python tests via pytest (if available)
 	@echo "$(BLUE)Running Python tests...$(RESET)"
@@ -109,7 +143,7 @@ test-go: ## Run Go tests
 	@echo "$(GREEN)✅ Go tests completed$(RESET)"
 
 selftest: build ## Run comprehensive self-tests
-	@echo "$(BLUE)Running VultiTool self-tests...$(RESET)"
+	@echo "$(BLUE)Running vultitool self-tests...$(RESET)"
 	@./$(PYTHON_BINARY) doctor selftest
 	@echo "$(GREEN)✅ Self-tests completed$(RESET)"
 
@@ -131,17 +165,17 @@ clean-all: clean ## Clean everything including virtual environment
 	@echo "$(GREEN)✅ Complete clean finished$(RESET)"
 
 install: build ## Install vultitool (requires setup)
-	@echo "$(BLUE)Installing VultiTool...$(RESET)"
+	@echo "$(BLUE)Installing vultitool...$(RESET)"
 	@echo "$(YELLOW)Note: Installation creates symbolic links in your PATH$(RESET)"
 	@sudo ln -sf "$(PWD)/$(PYTHON_BINARY)" /usr/local/bin/$(PYTHON_BINARY)
 	@sudo ln -sf "$(PWD)/$(GO_BINARY)" /usr/local/bin/$(GO_BINARY)
-	@echo "$(GREEN)✅ VultiTool installed to /usr/local/bin/$(RESET)"
+	@echo "$(GREEN)✅ vultitool installed to /usr/local/bin/$(RESET)"
 
 uninstall: ## Uninstall vultitool
-	@echo "$(BLUE)Uninstalling VultiTool...$(RESET)"
+	@echo "$(BLUE)Uninstalling vultitool...$(RESET)"
 	@sudo rm -f /usr/local/bin/$(PYTHON_BINARY)
 	@sudo rm -f /usr/local/bin/$(GO_BINARY)
-	@echo "$(GREEN)✅ VultiTool uninstalled$(RESET)"
+	@echo "$(GREEN)✅ vultitool uninstalled$(RESET)"
 
 format: ## Format code (Python: black, Go: gofmt)
 	@echo "$(BLUE)Formatting code...$(RESET)"
@@ -188,7 +222,7 @@ check-deps: ## Check if required tools are installed
 
 # Show current status
 status: ## Show current build status
-	@echo "$(BLUE)VultiTool Status:$(RESET)"
+	@echo "$(BLUE)vultitool Status:$(RESET)"
 	@echo "  Python binary: $(if $(shell test -x $(PYTHON_BINARY) && echo true),$(GREEN)✅ Ready$(RESET),$(YELLOW)❌ Not built$(RESET))"
 	@echo "  Go binary: $(if $(shell test -x $(GO_BINARY) && echo true),$(GREEN)✅ Ready$(RESET),$(YELLOW)❌ Not built$(RESET))"
 	@echo "  Python protobuf: $(if $(shell test -d $(GENERATED_DIR) && echo true),$(GREEN)✅ Generated$(RESET),$(YELLOW)❌ Not generated$(RESET))"

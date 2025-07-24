@@ -9,6 +9,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 *No unreleased changes at this time.*
 
+## [v0.3.7] - 2025-07-24 🏷️ Brand Consistency & Protobuf Version Management
+
+### Added
+- **Comprehensive pre-commit validation system**: New `scripts/pre-commit-check.sh` with quick and full clean-slate testing modes
+- **Automatic protobuf version management**: New `scripts/setup-protobuf.py` detects protoc compiler version and installs matching Python protobuf library
+- **Intelligent cross-platform setup**: `make setup-protobuf` handles version compatibility across macOS, Linux, and WSL automatically
+- **CI/CD-ready infrastructure**: Pre-commit hooks and automated validation for professional development workflows
+- **CLI help flags**: Added `vultitool help` and `--help` options for comprehensive usage information
+- **Enhanced macOS bootstrap**: `bootstrap-macos.sh` provides streamlined Quick Start installation experience
+
+### Fixed
+- **CRITICAL: Eliminated protobuf version warnings permanently**: Pinned `protobuf==5.29.3` in `requirements.txt` to match generated protobuf files (resolves "Protobuf gencode version 5.29.3 is exactly one major version older than runtime version 6.31.1" warnings)
+- **Pre-commit validation reliability**: Fixed naming convention checks to avoid false positives in validation scripts themselves
+- **Build system robustness**: Clean-slate validation now passes 100% reliably with proper dependency management
+- **Standardized naming conventions**: Corrected "VultiTool" → "vultitool" (lowercase) and "VultIsig" → "Vultisig" (title case) throughout entire codebase
+- **Cross-platform protobuf compatibility**: Automatic version detection works with different protoc versions (macOS Homebrew, Ubuntu packages, WSL environments)
+
+### Changed
+- **Professional branding consistency**: All CLI output, documentation, and code comments now use standardized naming conventions
+- **Improved build system messaging**: Makefile targets display consistent lowercase "vultitool" branding
+- **Enhanced setup workflow**: `make setup` now includes automatic protobuf version alignment for seamless developer experience
+
+### Technical
+- **Version mapping system**: Intelligent protoc-to-Python-protobuf version mapping ensures compatibility across platforms
+- **Flexible requirements**: Updated `requirements.txt` to support automatic version detection while maintaining compatibility
+- **Synchronized documentation**: All naming conventions aligned across Python, Go, shell scripts, and documentation
+
 ## [v0.3.6] - 2025-07-23 🍎 macOS Developer Experience Enhancement
 
 ### Added

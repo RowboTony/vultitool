@@ -1,5 +1,7 @@
 # Core dependencies
-protobuf>=5.26.0
+# Note: Protobuf version pinned to exactly match protoc compiler version (29.3)
+# This eliminates runtime version warnings by matching generated protobuf files
+protobuf==5.29.3
 
 # Data serialization
 PyYAML>=6.0
