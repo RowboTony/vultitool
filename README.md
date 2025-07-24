@@ -178,6 +178,64 @@ Pass rate: 100.0%
 
 See [`TESTING.md`](TESTING.md) for complete testing documentation.
 
+## Developer Workflow & CI/CD
+
+vultitool includes comprehensive CI/CD-ready infrastructure for professional development workflows:
+
+### Pre-Commit Validation System
+
+**Quick Validation (5-10 seconds)**
+```bash
+# Run fast pre-commit checks before every commit
+./scripts/pre-commit-check.sh quick
+
+# Install as git pre-commit hook (runs automatically on git commit)
+./scripts/pre-commit-check.sh setup  
+```
+
+**Full Clean-Slate Validation (2-3 minutes)**
+```bash
+# Full validation: rebuilds everything from scratch
+./scripts/pre-commit-check.sh
+
+# Alternative: use Makefile target
+make test-clean
+```
+
+### What Gets Validated
+
+✅ **Version consistency** across VERSION file, CHANGELOG.md, and CLI output  
+✅ **Naming conventions** (vultitool lowercase, Vultisig title case)  
+✅ **No protobuf warnings** from version mismatches  
+✅ **Self-tests pass** (48/48 test suite)  
+✅ **Clean environment** builds and works properly  
+✅ **Dependency integrity** ensures reproducible builds  
+
+### Developer Commands
+
+```bash
+# Essential developer workflow
+./scripts/pre-commit-check.sh quick  # Before every commit
+git add .
+# Craft commit message manually
+
+# For releases or major PRs
+./scripts/pre-commit-check.sh         # Full validation
+
+# Build system helpers  
+make status                           # Check current build state
+make check-deps                      # Verify all tools installed
+make clean && make build             # Fresh rebuild
+```
+
+### Why This Infrastructure Matters
+
+- **Prevents "works on my machine" issues** - Clean-slate testing catches environment dependencies
+- **Eliminates dependency hell** - Version pinning and validation prevents protobuf warnings
+- **Maintains code quality** - Automated checks enforce naming conventions and standards
+- **Enables CI/CD integration** - Scripts designed for automated testing environments
+- **Professional development** - Matches enterprise-grade development practices
+
 ## Command Reference
 
 ### `vultitool vault parse <file>`

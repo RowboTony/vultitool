@@ -11,7 +11,7 @@ YELLOW='\033[33m'
 BLUE='\033[34m'
 RESET='\033[0m'
 
-echo -e "${BLUE}🚀 VultiTool macOS Bootstrap Script${RESET}"
+echo -e "${BLUE}🚀 vultitool macOS Bootstrap Script${RESET}"
 echo -e "${BLUE}====================================${RESET}"
 echo ""
 

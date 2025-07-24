@@ -142,7 +142,7 @@ class DoctorCommands:
                     text=True, 
                     timeout=5
                 )
-                if result.returncode == 0 and "VultiTool" in result.stdout and "Commands:" in result.stdout:
+                if result.returncode == 0 and "vultitool" in result.stdout and "Commands:" in result.stdout:
                     print("✅ Go binary functionality: OK")
                 else:
                     issues.append("vultitool-go --help failed or returned unexpected output")

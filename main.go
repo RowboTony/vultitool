@@ -23,7 +23,7 @@ func getVersion() string {
 }
 
 func main() {
-	fmt.Println("VultiTool - Vault decryption utility")
+	fmt.Println("vultitool - Vault decryption utility")
 	
 	if len(os.Args) < 2 {
 		printUsage()

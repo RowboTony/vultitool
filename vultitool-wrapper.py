@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-VultiTool Wrapper Script
+vultitool Wrapper Script
 Automatically uses the virtual environment if available, otherwise falls back to system Python.
 """
 

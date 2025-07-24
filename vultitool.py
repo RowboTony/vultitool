@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-VultiTool - Command-line tools for working with VultiSig vault files
+vultitool - Command-line tools for working with Vultisig vault files
 """
 
 import sys
@@ -28,7 +28,7 @@ def get_version():
 def main():
     """Main entry point for vultitool"""
     parser = argparse.ArgumentParser(
-        description="VultiTool - Command-line tools for VultiSig vault files",
+        description="vultitool - Command-line tools for Vultisig vault files",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
