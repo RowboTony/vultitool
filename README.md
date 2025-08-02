@@ -1,4 +1,48 @@
-# `vultitool`
+> **⚠️ ARCHIVED: This project is no longer maintained. Please use [`vultool`](https://github.com/RowboTony/vultool) instead.**
+
+---
+
+# vultitool-poc-py (ARCHIVED, NO LONGER MAINTAINED)
+
+> **⚠️ This repository is a proof-of-concept and is no longer maintained.  
+> Development has moved to the next-generation CLI tool: [`vultool`](https://github.com/RowboTony/vultool).  
+> Please use [vultool](https://github.com/RowboTony/vultool) for all current and future Vultisig CLI workflows.  
+> This repo remains for historical reference only.**
+
+---
+
+## Legacy Project Description
+
+A command-line tool for parsing, analyzing, and validating Vultisig `.vult` vault files.  
+**Note:** This proof-of-concept Python codebase (`vultitool-poc-py`) has been superseded by [`vultool`](https://github.com/RowboTony/vultool), which is actively developed and production-focused.
+
+---
+
+## Why Was This Project Archived?
+
+- This repo was an early R&D effort to understand `.vult` files and document the Vultisig ecosystem.
+- All lessons learned, design improvements, and new features are now in [`vultool`](https://github.com/RowboTony/vultool).
+- `vultool` is faster, more robust, has better test coverage, and follows modern CLI conventions.
+
+---
+
+## Where To Go Now
+
+- **For all active development and usage:**  
+  → [https://github.com/RowboTony/vultool](https://github.com/RowboTony/vultool)
+- **For historical reference or Python PoC:**  
+  → Feel free to browse this repo, but note it will not receive updates or bugfixes.
+
+---
+
+Thank you for supporting open-source research and tool development for the Vultisig ecosystem!
+
+---
+---
+
+# README.md (archived)
+
+---
 
 **Vultisig CLI Ecosystem Tool Suite**
 
@@ -515,6 +559,6 @@ Licensed under the Apache License, Version 2.0.
 
 **Built with:** Python, Protocol Buffers, Vultisig commondata schema
 
-**Status:** Active development - MVP parser complete, expanding functionality
+**Status:** Archived – Development has moved to [`vultool`](https://github.com/RowboTony/vultool)
 
 For detailed technical documentation, see [spec.md](spec.md).
